@@ -23,12 +23,12 @@ An agent skill for reviewing academic revisions. Compare two drafts, or propose 
 
 <p align="center">
   <picture>
-    <source media="(max-width: 600px)" srcset="assets/readme-why-mobile.png">
-    <img src="assets/readme-why.png" alt="An AI edit returns a revised draft, leaving questions about what changed and why. Review each edit with source context, before-and-after passages, and an explanation together." width="1400">
+    <source media="(max-width: 600px)" srcset="assets/readme-why-decisions-mobile.png">
+    <img src="assets/readme-why-decisions.png" alt="Decide what goes into the next draft. Language: is the wording clearer? Structure: does the argument flow? Meaning: has the claim changed? Discuss edits by change ID and ask the agent to apply your selection." width="1400">
   </picture>
 </p>
 
-After an AI edit, I want to compare the original and revised passages with enough context to understand the change. This skill keeps the passages and their explanations together, so each edit is easier to review.
+The separate report gives you and your co-authors a shared record of what was checked and what remains unresolved.
 
 ## Install
 
