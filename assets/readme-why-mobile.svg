@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="620" viewBox="0 0 720 620" role="img" aria-labelledby="title desc">
+  <title id="title">From an AI edit to a contextual review</title>
+  <desc id="desc">A request produces a revised draft. Read source context, original and revised passages, and an explanation together to review the edit.</desc>
+  <rect width="720" height="620" rx="24" fill="#FAFBFD"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="32" y="28" width="656" height="60" rx="12" fill="#EDE7F3"/>
+    <text x="58" y="68" fill="#5E3069" font-size="32">“Clarify this paragraph.”</text>
+    <rect x="38" y="112" width="104" height="142" rx="9" fill="#FFFFFF" stroke="#DBE1EB"/>
+    <path d="M 57 136 H 122 M 57 160 H 122 M 57 208 H 122 M 57 232 H 104" stroke="#BFC8D7" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 57 184 H 114" stroke="#742F75" stroke-width="5" stroke-linecap="round"/>
+    <text x="183" y="133" fill="#647086" font-size="27">Revised draft</text>
+    <g font-family="Georgia, 'Times New Roman', serif" fill="#172033" font-size="42">
+      <text x="181" y="184">What changed?</text>
+      <text x="181" y="237">Why this edit?</text>
+    </g>
+    <path d="M 360 272 V 292 M 350 283 L 360 293 L 370 283" fill="none" stroke="#8893A7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="32" y="308" width="656" height="284" rx="18" fill="#FFFFFF" stroke="#DBE1EB"/>
+    <text x="56" y="355" fill="#172033" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="700">Review each edit</text>
+    <rect x="56" y="377" width="608" height="46" rx="8" fill="#EAF1EB"/>
+    <text x="77" y="410" fill="#416748" font-size="29" font-weight="700">Source context</text>
+    <path d="M 352 400 H 442 M 471 400 H 563 M 592 400 H 638" stroke="#AFC3B3" stroke-width="5" stroke-linecap="round"/>
+    <rect x="56" y="437" width="293" height="72" rx="8" fill="#FAFBFD" stroke="#DBE1EB"/>
+    <rect x="370" y="437" width="294" height="72" rx="8" fill="#FAFBFD" stroke="#DBE1EB"/>
+    <text x="77" y="470" fill="#172033" font-size="29" font-weight="700">Before</text>
+    <text x="391" y="470" fill="#172033" font-size="29" font-weight="700">After</text>
+    <path d="M 80 489 H 148 M 177 489 H 255 M 284 489 H 323" stroke="#BFC8D7" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 394 489 H 502" stroke="#742F75" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 531 489 H 637" stroke="#BFC8D7" stroke-width="5" stroke-linecap="round"/>
+    <rect x="56" y="523" width="608" height="46" rx="8" fill="#EAF1EB"/>
+    <text x="77" y="556" fill="#416748" font-size="29" font-weight="700">Explanation</text>
+    <path d="M 352 546 H 490 M 520 546 H 638" stroke="#AFC3B3" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

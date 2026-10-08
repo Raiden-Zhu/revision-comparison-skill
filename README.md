@@ -5,6 +5,7 @@
 </p>
 
 <p align="center">
+  <a href="#why-this-skill">Why</a> ·
   <a href="#install">Install</a> ·
   <a href="#examples">Examples</a> ·
   <a href="#quick-start">Quick start</a> ·
@@ -13,7 +14,18 @@
   <a href="LICENSE">MIT license</a>
 </p>
 
-An agent skill for reviewing academic revisions: **original passage, revised passage, context, and reason together**. Compare two drafts, or propose a revision from one draft and an editing goal. Markdown is the default; PDF export is optional.
+An agent skill for reviewing academic revisions. Compare two drafts, or propose a revision from one draft and an editing goal. Markdown is the default; PDF export is optional.
+
+## Why this skill
+
+<p align="center">
+  <picture>
+    <source media="(max-width: 600px)" srcset="assets/readme-why-mobile.png">
+    <img src="assets/readme-why.png" alt="An AI edit returns a revised draft, leaving questions about what changed and why. Review each edit with source context, before-and-after passages, and an explanation together." width="1400">
+  </picture>
+</p>
+
+After an AI edit, I want to compare the original and revised passages with enough context to understand the change. This skill keeps the passages and their explanations together, so each edit is easier to review.
 
 ## Install
 
