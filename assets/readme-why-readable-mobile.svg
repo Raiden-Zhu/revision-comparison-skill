@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1130" viewBox="0 0 760 1130" role="img" aria-labelledby="title desc">
+  <title id="title">A revised excerpt is hard to review on its own.</title>
+  <desc id="desc">A received Reporting excerpt leaves the reader to find the original, recover the setup, and work out the change. A source-based review places the retained Protocol condition, three original Reporting paragraphs, their merged revision, and an editor-proposed explanation together. This synthetic example covers C2 and C3 of the structure-edit example.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F7F9FC"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="135%" height="145%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#26324D" flood-opacity=".07"/>
+    </filter>
+  </defs>
+  <rect width="760" height="1130" rx="24" fill="#FAFBFD"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <text fill="#172033" font-family="Georgia, 'Times New Roman', serif" font-size="36" font-weight="700" letter-spacing="-.4" aria-label="A revised excerpt is hard to review on its own.">
+      <tspan x="44" y="63">A revised excerpt is hard</tspan>
+      <tspan x="44" y="106">to review on its own.</tspan>
+    </text>
+
+    <text x="44" y="151" fill="#172033" font-family="Georgia, 'Times New Roman', serif" font-size="28" font-weight="700">The excerpt you receive</text>
+    <rect x="44" y="171" width="672" height="101" rx="10" fill="#FFFFFF" stroke="#DBE1EB"/>
+    <text fill="#172033" font-size="28" aria-label="We record test accuracy and report the average across five seeds.">
+      <tspan x="64" y="211">We record test accuracy and report</tspan>
+      <tspan x="64" y="247">the average across five seeds.</tspan>
+    </text>
+    <text x="64" y="310" fill="#566378" font-size="28">Find the original. Recover the setup.</text>
+    <text x="64" y="340" fill="#566378" font-size="28">Work out what changed.</text>
+    <path d="M 380 359 V 383 M 372 375 L 380 383 L 388 375" fill="none" stroke="#8893A7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="36" y="394" width="688" height="706" rx="18" fill="url(#paper)" stroke="#DBE1EB" filter="url(#shadow)"/>
+    <text x="66" y="430" fill="#172033" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700">The same edit, in context</text>
+
+    <rect x="66" y="447" width="628" height="132" rx="9" fill="#EAF1EB"/>
+    <text x="86" y="472" fill="#416748" font-size="18" font-weight="700" letter-spacing=".7">SOURCE CONTEXT · RETAINED IN BOTH VERSIONS</text>
+    <text x="86" y="510" fill="#35543B" font-size="28">We use a fixed training split.</text>
+    <text x="86" y="540" fill="#5A7360" font-size="18">Before · Protocol ¶1 · sentence 1</text>
+    <text x="86" y="565" fill="#5A7360" font-size="18">After · Protocol ¶1</text>
+
+    <rect x="66" y="596" width="628" height="183" rx="9" fill="#FFFFFF" stroke="#DBE1EB"/>
+    <text x="86" y="621" fill="#647086" font-size="20" font-weight="700" letter-spacing="1">BEFORE</text>
+    <text x="674" y="621" text-anchor="end" fill="#647086" font-size="20">Reporting ¶1–3</text>
+    <rect x="86" y="625" width="391" height="34" rx="4" fill="#F1E6EF"/>
+    <text x="92" y="652" fill="#172033" font-size="28">The training split is kept fixed.</text>
+    <text x="92" y="679" fill="#742F75" font-size="20">Removed here</text>
+    <text x="86" y="717" fill="#172033" font-size="28">We record test accuracy.</text>
+    <text x="86" y="756" fill="#172033" font-size="28">We report the average across five seeds.</text>
+
+    <rect x="66" y="797" width="628" height="125" rx="9" fill="#FFFFFF" stroke="#DBE1EB"/>
+    <text x="86" y="823" fill="#647086" font-size="20" font-weight="700" letter-spacing="1">AFTER</text>
+    <text x="674" y="823" text-anchor="end" fill="#647086" font-size="20">Reporting ¶1</text>
+    <text fill="#172033" font-size="28" aria-label="We record test accuracy and report the average across five seeds.">
+      <tspan x="86" y="862">We record test accuracy</tspan>
+      <tspan x="86" y="899" fill="#742F75">and</tspan><tspan xml:space="preserve"> report the average across five seeds.</tspan>
+    </text>
+
+    <path d="M 83 638 H 55 V 506 H 78 M 72 501 L 78 506 L 72 511" fill="none" stroke="#B494B4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="66" y="940" width="628" height="143" rx="9" fill="#EAF1EB"/>
+    <text x="86" y="965" fill="#416748" font-size="18" font-weight="700" letter-spacing=".7">EDITOR-PROPOSED EXPLANATION</text>
+    <text fill="#35543B" font-size="26" aria-label="Protocol already says the training split is fixed. Reporting now puts test accuracy and its five-seed average in one sentence.">
+      <tspan x="86" y="1003">Protocol already says the training split is fixed.</tspan>
+      <tspan x="86" y="1035">Reporting now puts test accuracy and its</tspan>
+      <tspan x="86" y="1067">five-seed average in one sentence.</tspan>
+    </text>
+    <text x="724" y="1116" text-anchor="end" fill="#647086" font-size="15">Synthetic excerpt · structure-edit · C2 + C3</text>
+  </g>
+</svg>

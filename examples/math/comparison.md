@@ -1,6 +1,6 @@
 # Grammar edit beside a multiline equation
 
-This synthetic example illustrates a small language correction while preserving the surrounding mathematical setup. The card layout has an editable [LaTeX comparison](comparison-styled.tex), a checked [PDF](comparison-styled.pdf), and a [rendered page preview](comparison-styled-preview.png). The earlier [plain LaTeX comparison](comparison.tex) and [PDF](comparison.pdf) are retained.
+This synthetic example illustrates a small language correction while preserving the surrounding mathematical setup. The card layout has an editable [LaTeX comparison](comparison-styled-readable.tex), a checked [PDF](comparison-styled-readable.pdf), and a [rendered page preview](comparison-styled-readable-preview.png). The earlier [plain LaTeX comparison](comparison.tex) and [PDF](comparison.pdf) are retained.
 
 - **Mode:** propose-and-compare; language-only, grammar correction.
 - **Versions:** [before.tex](before.tex) → [after.tex](after.tex); [identity.json](identity.json) records the compared source bytes.
@@ -34,7 +34,7 @@ We minimize the following regularized objective:
 
 **Explanation — editor-proposed:** “We” takes “minimize,” not “minimizes.” The optimization action and objective remain the same.
 
-**Meaning and review:** exposition-only. A byte comparison of the fragments shows that this verb ending is the only change. This verifies preservation of the formula's source, not correctness of a theorem or properties of an unseen implementation.
+**Meaning and review:** exposition-only. A byte comparison confirms that only the verb ending changed; the setup and equation are identical. The check concerns the text, not a proof of the result.
 
 ## Unchanged equation
 
@@ -62,9 +62,9 @@ To rebuild from this directory with a local LaTeX installation:
 ```sh
 mkdir -p ../../.scratch/math-style-build
 pdflatex -halt-on-error -interaction=nonstopmode \
-  -output-directory=../../.scratch/math-style-build comparison-styled.tex
+  -output-directory=../../.scratch/math-style-build comparison-styled-readable.tex
 pdflatex -halt-on-error -interaction=nonstopmode \
-  -output-directory=../../.scratch/math-style-build comparison-styled.tex
+  -output-directory=../../.scratch/math-style-build comparison-styled-readable.tex
 ```
 
 The preview demonstrates this particular wrapper and multiline equation. Arbitrary manuscript packages or display environments may require different handling.

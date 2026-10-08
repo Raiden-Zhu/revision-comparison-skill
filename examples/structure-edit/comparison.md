@@ -9,7 +9,7 @@ This synthetic protocol describes a fixed split, a frozen extractor, the gate's 
 
 ## Context
 
-**Editor summary:** Protocol states the shared setup, Training makes the existing update budget visible, and Reporting records the metric and aggregation. These are editorial descriptions of the sections' roles, not claims about an actual experiment.
+**Editor summary:** Protocol describes the fixed split and frozen extractor, Training gives the update count, and Reporting describes test accuracy and its five-seed average.
 
 ## Change index
 
@@ -43,7 +43,7 @@ Paragraph 2:
 The feature extractor is frozen in both conditions.
 ```
 
-**Explanation — editor-proposed:** give the split and the extractor's status separate paragraphs. This is a small illustration of one-to-many mapping, not a rule that every setup needs short paragraphs.
+**Explanation — editor-proposed:** give the fixed-split condition and the frozen-extractor condition separate paragraphs.
 
 **Meaning and review:** exposition-only. Both sentences and their order are preserved exactly. No condition is dropped.
 
@@ -85,9 +85,9 @@ We report the average across five seeds.
 We record test accuracy and report the average across five seeds.
 ```
 
-**Explanation — editor-proposed:** connect the recorded metric with its reported aggregation in one sentence.
+**Explanation — editor-proposed:** put test accuracy and its five-seed average in one sentence.
 
-**Meaning and review:** equivalent within the supplied context: test accuracy is the only metric named, and the aggregation remains an average across five seeds. If the preceding text named several metrics, that interpretation would need checking. This does not verify any actual result or evaluation protocol.
+**Meaning and review:** equivalent within the supplied context: test accuracy is the only metric named, and the average still covers five seeds. If the preceding text named several metrics, check which one the average refers to.
 
 ## C4 · Add a Training heading
 
@@ -117,4 +117,4 @@ We train the gate for 2,000 updates.
 
 ## Delivery
 
-The comparison preserves the exact source passages. `after.md` is the sole proposed revision. No source integration or scientific audit was performed.
+The comparison preserves the exact source passages. `after.md` is the sole proposed revision; it has not been applied. This example checks changes to the text, with no experimental records supplied.

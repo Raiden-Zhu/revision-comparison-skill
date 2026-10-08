@@ -2,7 +2,7 @@
 
 This synthetic section describes a gate on frozen features. The requested revision clarifies the acting component and shortens one passive construction. It does not change the model or evaluation.
 
-The [PDF comparison](comparison.pdf) renders the same source passages with the reusable card theme. Its [LaTeX source](comparison.tex) is editable; the [page preview](comparison-preview.png) is rendered directly from the PDF.
+The [PDF comparison](comparison-readable.pdf) renders the same source passages with the reusable card theme. Its [LaTeX source](comparison-readable.tex) is editable; the [page preview](comparison-readable-preview.png) is rendered directly from the PDF.
 
 - **Mode:** propose-and-compare; language-only.
 - **Versions:** [before.md](before.md) → [after.md](after.md). File identities are recorded in [identity.json](identity.json).
@@ -42,9 +42,9 @@ It acts on $h(x)$, and it controls which coordinates reach the classifier.
 The gate $g_\theta$ acts on $h(x)$ and controls which coordinates reach the classifier.
 ```
 
-**Explanation — editor-proposed:** name the gate and remove the repeated subject. This is a clarity edit, not a claim that the original sentence was grammatically invalid.
+**Explanation — editor-proposed:** naming the gate makes clear which component acts on the features. The second “it” is no longer needed. The original sentence is grammatical.
 
-**Meaning and review:** exposition-only. Checked against the shared definition: the gate, input features, and coordinate-selection role are preserved. No scientific validity audit was performed.
+**Meaning and review:** exposition-only. The gate, input features, and coordinate-selection role match the shared definition in both versions.
 
 ## C2 · Shorten the passive construction
 
@@ -60,7 +60,7 @@ The gated features are used by the classifier. The extractor is not updated.
 The classifier uses the gated features. The extractor is not updated.
 ```
 
-**Explanation — editor-proposed:** the shorter active construction names the same consumer. Passive voice is not inherently an error; this is an optional expression improvement.
+**Explanation — editor-proposed:** put the classifier first and use the shorter “uses.” The passive version is also grammatical.
 
 **Meaning and review:** exposition-only. The frozen-extractor condition remains verbatim. No formulas, numbers, citations, or evaluation claims were changed.
 

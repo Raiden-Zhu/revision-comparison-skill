@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source media="(max-width: 600px)" srcset="assets/readme-hero-classic-mobile.png">
-    <img src="assets/readme-hero-classic.png" alt="Revision Comparison: the same 38% becomes a broader timing claim. Highlighted words and a small arrow show the change; a labeled summary of the timing protocol explains why author review is needed." width="1400">
+    <source media="(max-width: 600px)" srcset="assets/readme-hero-readable-mobile.png">
+    <img src="assets/readme-hero-readable.png" alt="Revision Comparison: optimization time becomes end-to-end training time, with the same 38% reduction. Highlighted words show the change, and the timing definition explains why the claim needs review." width="1400">
   </picture>
 </p>
 
@@ -23,8 +23,8 @@ An agent skill for reviewing academic revisions. Compare two drafts, or propose 
 
 <p align="center">
   <picture>
-    <source media="(max-width: 600px)" srcset="assets/readme-why-context-mobile.png">
-    <img src="assets/readme-why-context.png" alt="An isolated revised excerpt leaves the reader to find the original, recover the setup, and work out what changed. The same excerpt shown with the original Reporting paragraphs and the fixed-split condition retained in Protocol makes the deletion and merge understandable. An illustrative excerpt from the synthetic structure-edit example, C2 and C3." width="1400">
+    <source media="(max-width: 600px)" srcset="assets/readme-why-readable-mobile.png">
+    <img src="assets/readme-why-readable.png" alt="A revised excerpt on its own leaves you to find the original and its context. Seeing the original Reporting paragraphs beside the fixed-split condition in Protocol explains the deletion and merge. An excerpt from the synthetic structure-edit example, C2 and C3." width="1400">
   </picture>
 </p>
 
@@ -50,31 +50,31 @@ git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
 
 Start a new agent session, then select `$revision-comparison` in Codex or invoke `/revision-comparison` in Claude Code. [Already cloned, project installation, or custom path?](#advanced-installation)
 
-While the repository is private, cloning requires your normal GitHub access. Existing installations are preserved.
+The repository is currently private, so you need GitHub access to clone it. The installer leaves existing installations unchanged.
 
 ## Examples
 
-Actual PDF exports from synthetic examples. Click a preview to open the PDF.
+PDF reports from synthetic examples. Click a preview to open the PDF.
 
 **Same number, broader claim · synthetic ML revision**
 
-`Optimization time` becomes `end-to-end training time`, with the same 38% reduction. The report brings in the timing protocol from another section: feature precomputation is excluded.
+The number stays at 38%, but `optimization time` becomes `end-to-end training time`. The report shows the timing definition from another section: the clock starts after feature precomputation.
 
-[Open the two-page PDF](examples/contextual-review/comparison.pdf) · [Full report](examples/contextual-review/comparison.md) · [Before](examples/contextual-review/before.md) / [After](examples/contextual-review/after.md) · [LaTeX](examples/contextual-review/comparison.tex)
+[Open the two-page PDF](examples/contextual-review/comparison-readable.pdf) · [Full report](examples/contextual-review/comparison.md) · [Before](examples/contextual-review/before.md) / [After](examples/contextual-review/after.md) · [LaTeX](examples/contextual-review/comparison-readable.tex)
 
 <p align="center">
-  <a href="examples/contextual-review/comparison.pdf"><img src="examples/contextual-review/comparison-detail.png" alt="Actual PDF excerpt, C3: a timing definition from Evaluation Protocol, exact before-and-after Summary sentences, an explanation of the broader metric, and an author-review status." width="860"></a>
+  <a href="examples/contextual-review/comparison-readable.pdf"><img src="examples/contextual-review/comparison-readable-detail.png" alt="PDF excerpt, C3: the timing definition from Evaluation Protocol, the original and revised Summary sentences, and a review note explaining which timing measure the 38% refers to." width="860"></a>
 </p>
 
-The full report also traces a useful language edit (**C1**) and two reporting paragraphs moved and merged into one (**C2**). It distinguishes those improvements from the claim that needs review (**C3**).
+The report also shows a shorter training description (**C1**) and two reporting paragraphs moved and combined (**C2**). The timing claim (**C3**) needs closer review.
 
 <details>
 <summary>A simpler language-only proposal</summary>
 
-[Open PDF](examples/language-edit/comparison.pdf) · [Full page](examples/language-edit/comparison-preview.png) · [LaTeX](examples/language-edit/comparison.tex)
+[Open PDF](examples/language-edit/comparison-readable.pdf) · [Full page](examples/language-edit/comparison-readable-preview.png) · [LaTeX](examples/language-edit/comparison-readable.tex)
 
 <p align="center">
-  <a href="examples/language-edit/comparison.pdf"><img src="examples/language-edit/comparison-detail.png" alt="Actual language-edit PDF: clarify which component acts on frozen features, with an editor-proposed reason." width="860"></a>
+  <a href="examples/language-edit/comparison-readable.pdf"><img src="examples/language-edit/comparison-readable-detail.png" alt="Language-edit PDF: name the gate that acts on the frozen features, with the editor's reason beside the passages." width="860"></a>
 </p>
 
 </details>
@@ -82,10 +82,10 @@ The full report also traces a useful language edit (**C1**) and two reporting pa
 <details>
 <summary>Mathematical text: a grammar correction with the full equation preserved</summary>
 
-[Open PDF](examples/math/comparison-styled.pdf) · [Editable LaTeX](examples/math/comparison-styled.tex)
+[Open PDF](examples/math/comparison-styled-readable.pdf) · [Editable LaTeX](examples/math/comparison-styled-readable.tex)
 
 <p align="center">
-  <a href="examples/math/comparison-styled.pdf"><img src="examples/math/comparison-styled-preview.png" alt="Actual mathematical revision PDF: full original and revised equations labeled B1 and A1, with the changed verb in purple." width="860"></a>
+  <a href="examples/math/comparison-styled-readable.pdf"><img src="examples/math/comparison-styled-readable-preview.png" alt="Mathematical revision PDF: full original and revised equations labeled B1 and A1, with the changed verb in purple." width="860"></a>
 </p>
 
 </details>
@@ -95,13 +95,13 @@ The full report also traces a useful language edit (**C1**) and two reporting pa
 
 | Example | What to look for | Open |
 | --- | --- | --- |
-| Contextual review | Read a changed claim against a moved protocol; distinguish scope changes from useful edits | [Report](examples/contextual-review/comparison.md) · [Full page](examples/contextual-review/comparison-preview.png) · [Before](examples/contextual-review/before.md) · [After](examples/contextual-review/after.md) |
-| Language edit | Name the acting component; preserve the frozen-extractor condition | [Report](examples/language-edit/comparison.md) · [Before](examples/language-edit/before.md) · [After](examples/language-edit/after.md) |
+| Contextual review | Check what a timing claim includes; follow its definition across sections | [Report](examples/contextual-review/comparison.md) · [Full page](examples/contextual-review/comparison-readable-preview.png) · [Before](examples/contextual-review/before.md) · [After](examples/contextual-review/after.md) |
+| Language edit | Make clear that the gate acts on the features; keep the extractor frozen | [Report](examples/language-edit/comparison.md) · [Before](examples/language-edit/before.md) · [After](examples/language-edit/after.md) |
 | Structure edit | Track moved and merged passages | [Report](examples/structure-edit/comparison.md) · [Before](examples/structure-edit/before.md) · [After](examples/structure-edit/after.md) |
-| Meaning review | Expose a removed condition and an uncertain objective reformulation | [Report](examples/semantic-review/comparison.md) · [Before](examples/semantic-review/before.md) · [After](examples/semantic-review/after.md) |
+| Meaning review | Find a removed assumption and check whether a rewritten objective means the same thing | [Report](examples/semantic-review/comparison.md) · [Before](examples/semantic-review/before.md) · [After](examples/semantic-review/after.md) |
 | Mathematical text | Preserve the full equation and its conditions | [Report](examples/math/comparison.md) · [Before](examples/math/before.tex) · [After](examples/math/after.tex) |
 
-Each example records the source identities. The banner illustrates C3 from the contextual review using exact before-and-after sentences and a labeled summary of the timing protocol. The full report quotes that protocol with its source locations. The PDF excerpt is rendered from the actual report. The [desktop](assets/readme-hero-classic.svg) and [mobile](assets/readme-hero-classic-mobile.svg) SVG sources are editable.
+Each example includes its source files and their hashes. The banner shows the exact before-and-after sentences from C3, with a short summary of the timing definition. The full report quotes that definition and gives its location. PDF previews are rendered from the reports. The [desktop](assets/readme-hero-readable.svg) and [mobile](assets/readme-hero-readable-mobile.svg) banner sources are editable.
 
 </details>
 
@@ -132,12 +132,12 @@ Save the Markdown comparison as review/method-proposal/comparison.md.
 Do not apply the proposal to the manuscript.
 ```
 
-Open `comparison.md` to review the changes by ID. Inputs are preserved as snapshots; a proposal also includes its authoritative revised text. These are prompts for your agent, not terminal commands.
+Open `comparison.md` to review the changes by ID. The output includes copies of your inputs and, for a proposed edit, the exact revised text. Paste these prompts into your agent.
 
 <details>
 <summary>Try the included example without a manuscript</summary>
 
-**Try the included material:** open the cloned repository in your agent and paste this prompt. No manuscript is needed.
+Open the cloned repository in your agent and paste this prompt:
 
 ```text
 Use revision-comparison in compare mode.
@@ -151,13 +151,13 @@ Save a new Markdown comparison as review/example-run/comparison.md.
 
 ## How it works
 
-`compare` preserves both supplied versions, including any errors, and reports concerns separately. `propose-and-compare` creates one revised version within your editing scope, then traces that same text throughout the report. The optional academic profile guides that writing step.
+`compare` preserves the supplied versions and shows their differences, with concerns reported separately. `propose-and-compare` writes a revision within your requested scope and compares it with the original. The optional academic profile guides the writing.
 
-Author explanations are labeled as provided reasons. If the agent interprets someone else's edit without an explanation, the reason is labeled as inferred. Language-only proposals preserve claims, notation, numbers, equations, citations, and document structure. Structural work needs an authorized scope; scientific changes need relevant evidence. See the [core instructions](skills/revision-comparison/SKILL.md) for the contract.
+The report distinguishes reasons supplied by the author from the agent's own interpretation. For an existing revision, the agent labels its own interpretation as inferred when no author explanation is available. Language-only proposals preserve claims, notation, numbers, equations, citations, and document structure. Structural edits follow the scope you request; changes to claims or mathematics need supporting evidence. See the [skill instructions](skills/revision-comparison/SKILL.md) for the editing rules.
 
 ### More prompts
 
-**Grammar across a manuscript:** provide the entry file and ask for coverage of its included text. Large documents may need several passes; the report should state which sections were covered.
+**Grammar across a manuscript:** give the entry file and ask the agent to check all included text. Large documents may need several passes; the report should state which sections were checked.
 
 ```text
 Use revision-comparison in propose-and-compare mode on paper/main.tex.
@@ -182,7 +182,7 @@ Save a Markdown comparison in review/intro/; do not apply edits.
 
 ### Apply selected edits
 
-Applying changes is independent of the two content modes. Request it explicitly and identify the version or changes to apply.
+To apply an edit, tell the agent which revised version or change IDs to use.
 
 ```text
 Apply C1 and C3 from review/method-proposal/comparison.md to
@@ -190,15 +190,15 @@ paper/method.tex. Keep the remaining passages as they are.
 Preserve a baseline and deliver a clean manuscript.
 ```
 
-If you want annotations inside an English manuscript, request them separately. The skill can use switchable annotations and English revision notes for supported LaTeX workflows. Approving a clean integration does not automatically request visible review notes.
+Applied edits produce a clean manuscript by default. For LaTeX, you can also ask for revision marks and English notes that can be switched off.
 
 ## Read the report
 
-The overview explains what the revision is trying to achieve and what it covers. Each change unit then identifies the passage's role in its section and supplies only the definitions or neighboring context needed to understand that particular edit.
+The overview states the editing goal, when supplied, and the sections covered. Each change shows the original and revised passages, their locations, the relevant context, and an explanation.
 
-Context comes from the supplied document or supporting material. Quote a needed definition or neighboring passage with its location; a distant assumption may need its own source pointer. Label an editor summary as a summary and an assigned section role as an editorial judgment. Neither replaces the exact before-and-after quotations, including any original errors. If required context is unavailable, report that limit rather than inventing a condition. Repeating the overview under every change makes a report harder to read.
+Context may be a neighboring sentence, a definition, or a condition from another section. Quoted context includes its location; editor summaries are labeled and kept separate from quotations. When needed material is missing, the report says what could not be checked.
 
-Each unit keeps the original passage, revised passage, and reason close together. Locations combine a section with a faithful anchor; reliable line numbers or paragraph IDs can supplement it. Stable IDs let you discuss or approve a change without searching for it again.
+Each change has an ID such as C1, so you can discuss or select it without finding the passage again. Section names and quoted anchors help you locate it in the manuscript; paragraph or line numbers are included where reliable.
 
 | Label | Presentation | Meaning |
 | --- | --- | --- |
@@ -210,33 +210,33 @@ Each unit keeps the original passage, revised passage, and reason close together
 
 Labels and IDs carry the meaning even when colors are unavailable. Markdown renderers vary in their support for colored text; the report remains readable without color.
 
-A reason should name the problem and benefit: an undefined term, unclear referent, repeated explanation, changed comparator, or removed condition. “More academic” alone does not explain an edit.
+A useful explanation says what changed and how it affects the passage. For example, naming the gate tells the reader which component acts on the features. “More academic” alone does not explain an edit.
 
-For whole-document comparisons, a coverage summary identifies which sections were compared, retained, or excluded. A local comparison does not imply a full-paper audit.
+For a whole-document comparison, the coverage summary lists the sections compared, unchanged, or left out.
 
 ## Meaning and confidence
 
-The report distinguishes exposition changes, equivalent reformulations, substantive changes, and uncertain cases. These descriptions do not by themselves certify scientific correctness. Verification status records what could actually be checked from the available sources.
+The report tells you whether an edit changes only the wording, preserves the meaning, changes a claim, or needs closer review. It also states what was checked against the supplied sources. This is a review of the edits, not a scientific validation of the manuscript.
 
-Preserve justified confidence as well as justified uncertainty. Missing evidence or context does not authorize silent weakening; flag what remains unverified. A theorem can retain proof language, while an empirical interpretation still needs its measured scope.
+The agent keeps justified confidence and uncertainty. Missing evidence is flagged rather than used to silently weaken a claim. A proved theorem can retain proof language; empirical claims stay within the conditions tested.
 
-Checks focus on the changed units and the context needed to assess them, including distant definitions or conditions. When a revision changes an assumption, inequality, comparison, or result value, the report makes that change visible and checks its support within the requested scope. It does not invent an experiment or silently expand into a manuscript-wide scientific review.
+When a revision changes an assumption, inequality, comparison, or result value, the report shows the change and checks its support within the requested scope. Definitions or conditions from other sections are included when needed to understand it.
 
 ## Optional academic style
 
-The [academic style profile](skills/revision-comparison/references/academic-style.md) supports author voice, direct prose, readable formalism, concise reasoning, and continuity between passages. It is optional and applies when proposing revisions.
+The optional [academic style profile](skills/revision-comparison/references/academic-style.md) favors direct wording, clear explanations, and a connected argument while preserving the author's voice. It applies when proposing revisions.
 
-Academic-Humanizer and research-paper-writing informed the separation between prose preferences and editing permissions. The profile is self-contained; neither skill is required to install or use it. It supports academic clarity rather than AI-detection or disclosure avoidance.
+Academic Humanizer and research-paper-writing informed the profile. It is self-contained; neither skill is required to install or use it. Its purpose is clear academic writing, not avoiding AI-use disclosure.
 
 The documentation is in English. Manuscript language follows the target document, and comparison explanations can use the language you request.
 
 ## Formats and limits
 
-- **Markdown:** the default, editable comparison artifact.
-- **LaTeX/PDF:** an optional export with isolated labels/counters, compilation checks, and rendered-page inspection. See [rendering guidance](skills/revision-comparison/references/rendering.md).
+- **Markdown:** the default, editable report.
+- **LaTeX/PDF:** an optional PDF with editable LaTeX source, compilation checks, and page-layout inspection. See [rendering guidance](skills/revision-comparison/references/rendering.md).
 - **Other documents:** use the host's available reading and export capabilities. Native Word Track Changes is not implemented by this repository.
 
-The skill needs readable source material. If a reference, formula, or passage cannot be recovered faithfully, the agent should disclose the limitation rather than reconstruct it from a guess. Successful compilation validates rendering, not scientific claims.
+The agent needs readable sources. If it cannot read a passage, formula, or reference reliably, it reports what is missing.
 
 The included [LaTeX theme](skills/revision-comparison/assets/comparison-style.tex) uses the banner's navy headings, green context and reason cards, subtle borders, and purple revision marks. It changes presentation only. Stacked cards can continue across pages; formulas retain their size and content. PDF export needs a working LaTeX toolchain with the packages listed in the rendering guide.
 
@@ -286,7 +286,7 @@ python3 scripts/install.py --agent claude-code --scope project --project "/absol
 
 ### Custom paths and other agents
 
-An exact destination overrides the host and scope defaults:
+Use `--dest` to choose the installation directory:
 
 ```sh
 python3 scripts/install.py --dest "/custom/skills/revision-comparison"
@@ -300,7 +300,7 @@ python3 scripts/install.py --dest "${CODEX_HOME:-$HOME/.codex}/skills/revision-c
 
 The installer refuses an existing destination, including a symbolic link, and reports its location. Review an existing installation before updating it. There is no force-overwrite option; a copy failure retains the partial directory for inspection.
 
-Other file-capable agents can read [`SKILL.md`](skills/revision-comparison/SKILL.md) directly and follow its relative references. Automatic discovery depends on the host. The skill itself needs no Python runtime; Python is used only by the optional installer. Manual installation should copy the whole skill directory.
+Other agents that can read files can follow [`SKILL.md`](skills/revision-comparison/SKILL.md) and its references directly. Whether the agent discovers the skill automatically depends on its host. Python is needed only for the installer. To install manually, copy the whole skill directory.
 
 ```sh
 python3 scripts/install.py --help
@@ -325,12 +325,12 @@ examples/
 evaluations/cases.md
 scripts/install.py
 tests/test_install.py
-assets/readme-hero-classic.svg       editable desktop banner
-assets/readme-hero-classic-mobile.svg  editable mobile banner
+assets/readme-hero-readable.svg       editable desktop banner
+assets/readme-hero-readable-mobile.svg  editable mobile banner
 LICENSE
 ```
 
-The [evaluation cases](evaluations/cases.md) cover representative failure modes without requiring a separate evaluation framework. Contributions should use synthetic or explicitly shareable material and keep the core contract as the authority for editing permissions and fidelity. To check the installer without touching your actual skill directories:
+The [evaluation cases](evaluations/cases.md) cover common mistakes in revision comparisons. Contributions should use synthetic or explicitly shareable material and follow the editing and source-preservation rules in `SKILL.md`. To check the installer without touching your actual skill directories:
 
 ```sh
 python3 -B -m unittest discover -s tests -p test_install.py -v

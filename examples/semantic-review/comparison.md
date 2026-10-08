@@ -16,7 +16,7 @@ The original Setup states:
 Assume bounded feature norms and set $\lambda > 0$. We use the regularized estimator defined below.
 ```
 
-**Editor summary:** the positive regularization parameter is relevant to the original uniqueness statement in C3. The revised draft removes that condition from both places. The estimator and loss are not defined in the supplied material, so neither version's convexity claim can be certified here.
+**Editor summary:** the original uniqueness statement in C3 includes the condition $\lambda > 0$. The revised draft removes it from both Setup and Result. Neither the estimator nor the loss is defined here, so the convexity claims in both drafts remain unverified.
 
 ## Change index
 
@@ -81,9 +81,9 @@ When $\lambda > 0$, the objective is strongly convex and has a unique minimizer.
 The objective is strongly convex and has a unique minimizer.
 ```
 
-**Explanation — observed change; intent unknown:** the revised statement is unconditional with respect to $\lambda$ within the supplied text. Its correctness cannot be inferred from smoother wording.
+**Explanation — observed change; intent unknown:** the revised statement no longer limits the result to $\lambda > 0$. The condition also disappears from Setup, as shown in C1.
 
-**Meaning and review:** substantive. No proof or loss assumptions were provided. Flag the broader claim for verification; do not silently reinsert the condition into the supplied `after.md` or declare the original theorem proved.
+**Meaning and review:** substantive. No loss assumptions or proof were supplied, so the broader convexity and uniqueness claim remains unverified.
 
 ## C4 · Change the reported accuracy
 

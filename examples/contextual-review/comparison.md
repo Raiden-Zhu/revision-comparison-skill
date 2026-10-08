@@ -2,7 +2,7 @@
 
 This synthetic excerpt describes an adapter trained on cached features from a frozen encoder. The supplied revision makes the method more concise, moves the reporting protocol, and changes the scope of the timing claim. The comparison explains all three changes; it preserves the supplied revision, including the claim that needs author review.
 
-The [PDF](comparison.pdf) uses the same card theme as the homepage. Its [editable LaTeX](comparison.tex) and [first-page preview](comparison-preview.png) are included. The [homepage excerpt](comparison-detail.png) is rendered directly from the first PDF page.
+The [PDF](comparison-readable.pdf) uses the same card theme as the homepage. Its [editable LaTeX](comparison-readable.tex) and [first-page preview](comparison-readable-preview.png) are included. The [homepage excerpt](comparison-readable-detail.png) is rendered directly from the first PDF page.
 
 - **Mode:** compare; both versions are supplied. No author brief or explanation accompanies them.
 - **Versions:** [before.md](before.md) → [after.md](after.md); byte identities in [identity.json](identity.json).
@@ -22,7 +22,7 @@ Paragraph numbers count prose blocks under each heading, separately in each vers
 
 ## C3 · Broaden the timing claim
 
-**Editorial role:** the Summary states the headline timing result. To assess this edit, the reader needs the measurement boundary from a different section.
+**Editorial role:** the Summary states the main timing result. To read this edit, check what the timer includes in the Evaluation Protocol.
 
 **Source context:** After, Evaluation Protocol ¶2, sentence 2; retained verbatim from Before, Results ¶3, sentence 2:
 
@@ -50,11 +50,11 @@ The adapter reduces end-to-end training time by 38%.
 
 **Observed change:** `optimization` is replaced with `end-to-end training`; `38%` is retained. The metric's stated scope expands even though its value does not change.
 
-**Explanation — inferred; author intent unknown:** the revised wording reads as a broader timing claim. The supplied protocol excludes feature precomputation, so it does not substantiate end-to-end time. Whether the author intended a new metric or has additional measurements is unknown.
+**Explanation — inferred:** the reported 38% reduction is for optimization time only: feature precomputation is excluded. The revision calls this an end-to-end reduction. No author explanation was supplied.
 
-**Meaning and review:** substantive scope change; author review needed. The mismatch between the revised wording and the supplied timing boundary is checked. The report does not establish that the number is false or independently verify either measurement. It does not repair the supplied After text.
+**Meaning and review:** substantive scope change; author review needed. The wording was checked against both drafts; the underlying timings remain unverified. Check which timing measurement the 38% refers to.
 
-**Connection to C2:** the timing boundary was moved, not deleted. Its After location supplies the context for this judgment.
+**Connection to C2:** the timing definition still appears in the revised draft, now in Evaluation Protocol. Read it alongside the changed Summary sentence.
 
 ## C1 · Make the training description more concise
 
@@ -70,9 +70,9 @@ We keep the encoder fixed. We compute one embedding per image and store it. A sm
 We cache one embedding per image from a frozen encoder and train a small adapter on the cached embeddings.
 ```
 
-**Explanation — inferred benefit; author intent unknown:** one sentence joins feature computation, storage, and adapter training. “Frozen encoder” retains the fixed-encoder condition; “cache” names the storage step directly. The original wording is grammatical.
+**Explanation — inferred benefit:** the revision describes caching the features and training the adapter in one sentence. “Frozen encoder” keeps the fixed-encoder condition, and “cache” includes storing the embeddings. The original wording is grammatical.
 
-**Meaning and review:** exposition-only. The fixed encoder, one embedding per image, storage, and adapter training on those embeddings are preserved in the stated description. No mechanism, equation, or experiment is independently verified.
+**Meaning and review:** exposition-only. Both descriptions keep the encoder fixed, store one embedding per image, and train the adapter on those embeddings.
 
 ## C2 · Move and merge the reporting protocol
 
@@ -94,10 +94,10 @@ We report mean optimization time across five seeds. Timing starts after feature 
 We report mean test accuracy and mean optimization time across five seeds. Timing starts after feature precomputation and excludes that cost.
 ```
 
-**Explanation — inferred benefit; author intent unknown:** the two reporting statements are combined and placed before the accuracy result. The reader meets the metrics, seed aggregation, and timing boundary together in the protocol.
+**Explanation — inferred benefit:** the two reporting statements now appear together before the accuracy result. Readers can find both metrics, the five-seed averages, and what the timer includes in one place.
 
-**Meaning and review:** equivalent reporting description within this excerpt. Both metrics still use five-seed means, and the timing boundary is unchanged. This is a move with a merge, not two deletions followed by an unrelated addition. The accuracy result remains verbatim.
+**Meaning and review:** equivalent within this excerpt. Both metrics still use five-seed means, and feature precomputation is still excluded from timing. The two source paragraphs form the revised reporting paragraph. The accuracy result is unchanged.
 
 ## Delivery
 
-Both supplied versions remain authoritative snapshots; no third version or applied edit is produced. All changed passages in this short excerpt map to C1–C3; no mapping is unresolved. C1 and C2 illustrate helpful wording and organization, while C3 records a scope change that needs author review. Input hashes identify the files and do not certify the underlying research.
+Both supplied drafts are preserved. C1–C3 account for all changed passages in this excerpt, with no unresolved mappings. C1 and C2 improve wording and organization; C3 needs author review because the timing claim has changed. File hashes are recorded in `identity.json`.

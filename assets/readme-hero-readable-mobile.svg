@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1140" viewBox="0 0 760 1140" role="img" aria-labelledby="title desc">
+  <title id="title">Revision Comparison — an agent skill</title>
+  <desc id="desc">A mobile adaptation of the original banner, with word highlights, a small arrow, an editor summary of the timing protocol, and the same contextual timing comparison.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F7F9FC"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="135%" height="145%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#26324D" flood-opacity=".08"/>
+    </filter>
+  </defs>
+  <rect width="760" height="1140" rx="24" fill="#FAFBFD"/>
+  <rect y="361" width="760" height="779" fill="url(#grid)" opacity=".65"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="54" y="45" width="170" height="36" rx="18" fill="#EDE7F3"/>
+    <circle cx="73" cy="63" r="4" fill="#742F75"/>
+    <text x="87" y="69" fill="#5E3069" font-size="17" font-weight="700" letter-spacing="1.4">AGENT SKILL</text>
+    <g fill="#172033" font-family="Georgia, 'Times New Roman', serif" font-size="82" font-weight="700" letter-spacing="-3">
+      <text x="52" y="170">Revision</text>
+      <text x="52" y="258">Comparison</text>
+    </g>
+    <text x="56" y="311" fill="#48566B" font-size="27">See what changed. Understand why it matters.</text>
+    <path d="M 57 345 H 103" stroke="#742F75" stroke-width="3" stroke-linecap="round"/>
+    <text x="121" y="351" fill="#566378" font-size="17" letter-spacing=".6">PASSAGES · CONTEXT · REASONS</text>
+
+    <rect x="36" y="386" width="688" height="679" rx="18" fill="url(#paper)" stroke="#DBE1EB" filter="url(#shadow)"/>
+    <text x="66" y="431" fill="#172033" font-size="31" font-weight="700">C3</text>
+    <text x="123" y="431" fill="#647086" font-size="26">Summary / timing claim</text>
+    <path d="M 66 457 H 694" stroke="#E4E8F0"/>
+    <rect x="66" y="480" width="628" height="110" rx="9" fill="#EAF1EB"/>
+    <text x="86" y="509" fill="#416748" font-size="17" font-weight="700" letter-spacing="1">CONTEXT · EDITOR SUMMARY</text>
+    <text x="86" y="544" fill="#35543B" font-size="27">Timing excludes feature precomputation.</text>
+    <text x="86" y="573" fill="#5A7360" font-size="16">After · Evaluation Protocol ¶2</text>
+
+    <text x="68" y="628" fill="#647086" font-size="18" font-weight="700" letter-spacing="1.2">BEFORE</text>
+    <text x="86" y="669" fill="#172033" font-size="32">The adapter reduces</text>
+    <rect x="80" y="679" width="184" height="39" rx="5" fill="#F2E6EF"/>
+    <text x="86" y="709" fill="#172033" font-size="32">optimization time by 38%.</text>
+    <path d="M 98 729 V 750 M 91 743 L 98 750 L 105 743" fill="none" stroke="#8893A7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="68" y="785" fill="#647086" font-size="18" font-weight="700" letter-spacing="1.2">AFTER</text>
+    <text x="86" y="825" fill="#172033" font-size="32">The adapter reduces</text>
+    <rect x="80" y="835" width="282" height="39" rx="5" fill="#F2E6EF"/>
+    <text x="86" y="865" fill="#172033" font-size="32"><tspan fill="#742F75">end-to-end training</tspan> time by 38%.</text>
+
+    <path d="M 66 889 H 694" stroke="#E4E8F0"/>
+    <text x="68" y="921" fill="#416748" font-size="17" font-weight="700" letter-spacing="1">REVIEW NOTE · INFERRED</text>
+    <text fill="#48566B" font-size="27" aria-label="The reported 38% reduction is for optimization time only.">
+      <tspan x="86" y="961">The reported 38% reduction is for</tspan>
+      <tspan x="86" y="997">optimization time only.</tspan>
+    </text>
+    <text x="694" y="1041" text-anchor="end" fill="#647086" font-size="19">Author review needed</text>
+    <text x="724" y="1106" text-anchor="end" fill="#647086" font-size="16" letter-spacing="1">SYNTHETIC COMPARISON</text>
+  </g>
+</svg>
