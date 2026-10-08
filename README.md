@@ -2,8 +2,8 @@
 
 <p align="center">
   <picture>
-    <source media="(max-width: 600px)" srcset="assets/readme-hero-context-mobile.png">
-    <img src="assets/readme-hero-context.png" alt="Revision Comparison: the same 38% becomes a broader timing claim. A source quote from another section shows that timing excludes feature precomputation, so the revised claim needs author review." width="1400">
+    <source media="(max-width: 600px)" srcset="assets/readme-hero-classic-mobile.png">
+    <img src="assets/readme-hero-classic.png" alt="Revision Comparison: the same 38% becomes a broader timing claim. Highlighted words and a small arrow show the change; a labeled summary of the timing protocol explains why author review is needed." width="1400">
   </picture>
 </p>
 
@@ -101,7 +101,7 @@ The full report also traces a useful language edit (**C1**) and two reporting pa
 | Meaning review | Expose a removed condition and an uncertain objective reformulation | [Report](examples/semantic-review/comparison.md) · [Before](examples/semantic-review/before.md) · [After](examples/semantic-review/after.md) |
 | Mathematical text | Preserve the full equation and its conditions | [Report](examples/math/comparison.md) · [Before](examples/math/before.tex) · [After](examples/math/after.tex) |
 
-Each example records the source identities. The banner illustrates C3 from the contextual review using exact sentences and a located source quote. The PDF excerpt is rendered from the actual report. The [desktop](assets/readme-hero-context.svg) and [mobile](assets/readme-hero-context-mobile.svg) SVG sources are editable.
+Each example records the source identities. The banner illustrates C3 from the contextual review using exact before-and-after sentences and a labeled summary of the timing protocol. The full report quotes that protocol with its source locations. The PDF excerpt is rendered from the actual report. The [desktop](assets/readme-hero-classic.svg) and [mobile](assets/readme-hero-classic-mobile.svg) SVG sources are editable.
 
 </details>
 
@@ -325,8 +325,8 @@ examples/
 evaluations/cases.md
 scripts/install.py
 tests/test_install.py
-assets/readme-hero-context.svg       editable desktop banner
-assets/readme-hero-context-mobile.svg  editable mobile banner
+assets/readme-hero-classic.svg       editable desktop banner
+assets/readme-hero-classic-mobile.svg  editable mobile banner
 LICENSE
 ```
 
