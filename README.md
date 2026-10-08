@@ -23,12 +23,12 @@ An agent skill for reviewing academic revisions. Compare two drafts, or propose 
 
 <p align="center">
   <picture>
-    <source media="(max-width: 600px)" srcset="assets/readme-why-decisions-mobile.png">
-    <img src="assets/readme-why-decisions.png" alt="Decide what goes into the next draft. Language: is the wording clearer? Structure: does the argument flow? Meaning: has the claim changed? Discuss edits by change ID and ask the agent to apply your selection." width="1400">
+    <source media="(max-width: 600px)" srcset="assets/readme-why-context-mobile.png">
+    <img src="assets/readme-why-context.png" alt="An isolated revised excerpt leaves the reader to find the original, recover the setup, and work out what changed. The same excerpt shown with the original Reporting paragraphs and the fixed-split condition retained in Protocol makes the deletion and merge understandable. An illustrative excerpt from the synthetic structure-edit example, C2 and C3." width="1400">
   </picture>
 </p>
 
-The separate report gives you and your co-authors a shared record of what was checked and what remains unresolved.
+An edited passage alone leaves you reconstructing the change. The comparison puts the original, revision, relevant context, and explanation in one place. [Read this example](examples/structure-edit/comparison.md).
 
 ## Install
 
