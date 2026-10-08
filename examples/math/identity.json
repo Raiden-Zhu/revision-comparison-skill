@@ -1,0 +1,12 @@
+{
+  "algorithm": "sha256",
+  "scope": "entire source files",
+  "before": {
+    "file": "before.tex",
+    "sha256": "c9835a7b2355f6fd26299374d71c24ea1f17bfff90a7197f6c0f1b03192d3f7e"
+  },
+  "after": {
+    "file": "after.tex",
+    "sha256": "0d9de26bb0ad186f9992897e99308b5aab33635b23e609c8e6fff360cdef8bb2"
+  }
+}

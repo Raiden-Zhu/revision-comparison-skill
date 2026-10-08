@@ -1,0 +1,82 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\input{../../skills/revision-comparison/assets/annotations.tex}
+\hypersetup{colorlinks=true,linkcolor=rcAdded,urlcolor=rcAdded,
+  pdftitle={Revision Comparison: a grammar edit beside a multiline equation},
+  pdfauthor={Raiden-Zhu}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\begin{document}
+{\LARGE\bfseries Revision Comparison}\par
+{\large A grammar edit beside a multiline equation}
+
+\textbf{Task.} Correct subject--verb agreement. Preserve the setup, parameter
+dimensions, regularization condition, equation, and concluding statement.
+This is synthetic material, not an experimental or theorem-validity report.
+
+\textbf{Versions.} \texttt{before.tex} and \texttt{after.tex}; source hashes are
+recorded in \texttt{identity.json}. Only C1 changes the source text.
+
+\section*{C1: original passage}
+\textbf{Location.} Objective-introduction sentence, anchor ``We minimizes''.
+The surrounding setup and equation are included to show the edit's scope.
+
+\renewcommand{\theequation}{B\arabic{equation}}
+\renewcommand{\theHequation}{before.\arabic{equation}}
+\setcounter{equation}{0}
+Let $X\in\mathbb{R}^{n\times d}$, $y\in\mathbb{R}^{n}$,
+$n\geq 1$, and $\lambda>0$. The parameter is $\theta\in\mathbb{R}^d$.
+
+We \rcrewrite{minimizes} the following regularized objective:
+\begin{align}
+F(\theta)
+ &= \frac{1}{2n}\sum_{i=1}^{n}
+    \left(\sum_{j=1}^{d}X_{ij}\theta_j-y_i\right)^2
+    +\frac{\lambda}{2}\|\theta\|_2^2 \label{before:eq:objective}\\
+ &= \frac{1}{2n}\|X\theta-y\|_2^2
+    +\frac{\lambda}{2}\sum_{j=1}^{d}\theta_j^2. \nonumber
+\end{align}
+The two lines of Equation~\eqref{before:eq:objective} express the same objective.
+
+\newpage
+\section*{C1: revised passage}
+\textbf{Location.} The same sentence, anchor ``We minimize''.
+
+\renewcommand{\theequation}{A\arabic{equation}}
+\renewcommand{\theHequation}{after.\arabic{equation}}
+\setcounter{equation}{0}
+Let $X\in\mathbb{R}^{n\times d}$, $y\in\mathbb{R}^{n}$,
+$n\geq 1$, and $\lambda>0$. The parameter is $\theta\in\mathbb{R}^d$.
+
+We \rcrewrite{minimize} the following regularized objective:
+\begin{align}
+F(\theta)
+ &= \frac{1}{2n}\sum_{i=1}^{n}
+    \left(\sum_{j=1}^{d}X_{ij}\theta_j-y_i\right)^2
+    +\frac{\lambda}{2}\|\theta\|_2^2 \label{after:eq:objective}\\
+ &= \frac{1}{2n}\|X\theta-y\|_2^2
+    +\frac{\lambda}{2}\sum_{j=1}^{d}\theta_j^2. \nonumber
+\end{align}
+The two lines of Equation~\eqref{after:eq:objective} express the same objective.
+
+\rcrationale{Editor-proposed: correct the verb agreement with ``We.''
+The subject, action, and mathematical content are preserved.}
+
+\textbf{Meaning and review.} Exposition-only. The verb ending is the only
+change between the source fragments. No proof or experimental claim has
+been audited. Formulas remain full-size and are not enclosed in inline
+color macros.
+
+\textbf{Presentation mapping.} The source label \texttt{eq:objective} is
+displayed as \texttt{before:eq:objective} (B1) and
+\texttt{after:eq:objective} (A1). Counters are reset separately.
+These labels belong to the comparison wrapper; the source files are unchanged.
+
+\textbf{Legend.} Purple marks a rewritten word; the source quotations include
+the same word replacement. IDs and side headings identify the change without
+relying on color. With annotations off, the two source versions remain visible.
+\end{document}

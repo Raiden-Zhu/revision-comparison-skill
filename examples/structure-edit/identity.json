@@ -1,0 +1,12 @@
+{
+  "algorithm": "sha256",
+  "scope": "entire source files",
+  "before": {
+    "file": "before.md",
+    "sha256": "662e770977c62b0d597b3dbe235c04a590f21786c2592f515d3429c29cec210e"
+  },
+  "after": {
+    "file": "after.md",
+    "sha256": "f83d8c5ce450b8658d5849872a25cc44565253e28e5068f19edcfb0e35072593"
+  }
+}

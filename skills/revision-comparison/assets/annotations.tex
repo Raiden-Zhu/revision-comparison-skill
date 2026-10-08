@@ -1,0 +1,14 @@
+% Inline annotation helpers. Use labels beside display math and complex blocks.
+\RequirePackage{xcolor}
+\definecolor{rcAdded}{RGB}{0,85,135}
+\definecolor{rcRewritten}{RGB}{116,47,117}
+\definecolor{rcNote}{RGB}{65,103,72}
+\newif\ifrcannotations
+\rcannotationstrue
+\newcommand{\rcadd}[1]{\ifrcannotations\textcolor{rcAdded}{#1}\else#1\fi}
+\newcommand{\rcrewrite}[1]{\ifrcannotations\textcolor{rcRewritten}{#1}\else#1\fi}
+\newcommand{\rcnote}[2]{\ifrcannotations\par\noindent
+  {\footnotesize\color{rcNote}\textbf{[#1]} #2}\par\fi}
+\newcommand{\rcRevisionNoteLabel}{Revision note:}
+\newcommand{\rcrationale}[1]{\ifrcannotations\par\noindent
+  {\footnotesize\color{rcNote}\textbf{\rcRevisionNoteLabel} #1}\par\fi}

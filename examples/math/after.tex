@@ -1,0 +1,13 @@
+Let $X\in\mathbb{R}^{n\times d}$, $y\in\mathbb{R}^{n}$,
+$n\geq 1$, and $\lambda>0$. The parameter is $\theta\in\mathbb{R}^d$.
+
+We minimize the following regularized objective:
+\begin{align}
+F(\theta)
+ &= \frac{1}{2n}\sum_{i=1}^{n}
+    \left(\sum_{j=1}^{d}X_{ij}\theta_j-y_i\right)^2
+    +\frac{\lambda}{2}\|\theta\|_2^2 \label{eq:objective}\\
+ &= \frac{1}{2n}\|X\theta-y\|_2^2
+    +\frac{\lambda}{2}\sum_{j=1}^{d}\theta_j^2. \nonumber
+\end{align}
+The two lines of Equation~\eqref{eq:objective} express the same objective.

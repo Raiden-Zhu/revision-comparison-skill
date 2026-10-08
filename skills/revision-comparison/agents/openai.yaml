@@ -1,0 +1,4 @@
+interface:
+  display_name: "Revision Comparison"
+  short_description: "Contextual revision comparisons with locations and reasons"
+  default_prompt: "Use $revision-comparison to compare my supplied document versions, or propose bounded edits when requested, with enough context to understand each change."
