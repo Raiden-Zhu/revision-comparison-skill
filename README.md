@@ -1,105 +1,45 @@
 # Revision Comparison
 
-Review a revision where the original, revised passage, and reason appear together.
+<p align="center">
+  <img src="assets/readme-hero.png" alt="Revision Comparison: an agent skill that puts before-and-after passages, context, and reasons in one review." width="1400">
+</p>
 
-Revision Comparison is a skill for file-reading and file-writing agents. It produces a separate review document with faithful before-and-after quotations, stable change IDs, locations, localized highlights, and explanations. It is useful for paper revisions, technical reports, and other documents whose wording and meaning need to remain traceable.
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#install">Install</a> ·
+  <a href="#examples">Examples</a> ·
+  <a href="#how-it-works">How it works</a> ·
+  <a href="skills/revision-comparison/SKILL.md">Skill instructions</a> ·
+  <a href="LICENSE">MIT license</a>
+</p>
 
-```text
-C1 · Method / feature extraction
-Context: The extractor is frozen; the gate is trainable.
-Before: “It acts on the features.”
-After:  “The gate acts on the features.”
-Reason: Proposed wording names the component instead of relying on “It.”
-```
+Review a revision with the original passage, revised passage, and reason together. Revision Comparison is an agent skill for academic papers and technical documents. It adds the context a reader needs to understand an edit: the acting component, a nearby definition, a distant assumption, or the passage's role in its section.
 
-The skill can compare a revision you already have or propose a revision for comparison. Applying selected edits to the source is a separate, explicitly requested action.
+Compare two supplied drafts, or give the agent one draft and an editing goal so it can propose a revision. Both produce a separate review document with exact quotations, locations, and change IDs. Applying edits to the manuscript is a separate request.
 
-## What you get
+A small [synthetic example](examples/language-edit/comparison.md), from Method, paragraph 2 in both versions:
 
-- A report overview stating the revision goal, scope, and constraints.
-- Local before-and-after pairs, with enough real context to read each change.
-- A change map linking IDs to source and revised locations.
-- Concrete reasons, distinguished from inferred explanations of someone else's edits.
-- A scoped account of meaning changes, verification limits, and unresolved concerns.
+> **Context — editor summary of Method, paragraph 1:** frozen extractor; trainable gate.<br>
+> **Before:** It acts on $h(x)$, and it controls which coordinates reach the classifier.<br>
+> **After:** The gate $g_\theta$ acts on $h(x)$ and controls which coordinates reach the classifier.<br>
+> **Reason — editor-proposed:** name the component and remove the repeated subject.
 
-Markdown is the default output. A PDF can accompany it when a working LaTeX toolchain and rendered-page inspection are available. Editable source remains part of that export.
+## Quick start
 
-See the [language-edit example](examples/language-edit/comparison.md), [structure-edit example](examples/structure-edit/comparison.md), [semantic-review example](examples/semantic-review/comparison.md), and [math example](examples/math/comparison.md). These examples use synthetic material.
+[Install the skill](#install), open your manuscript project in the agent, then paste one of these prompts. Replace the sample paths with your own.
 
-## Install
-
-The installable skill lives in [`skills/revision-comparison`](skills/revision-comparison), rather than the repository root. Copy the entire directory so its references and annotation assets remain available.
-
-### Codex
-
-With the skill installer available, ask your agent:
-
-```text
-Use skill-installer to install revision-comparison from
-https://github.com/Raiden-Zhu/revision-comparison-skill,
-using the repository path skills/revision-comparison.
-If that skill is already installed, stop and report its location.
-```
-
-Alternatively, clone this repository into a new directory:
-
-```sh
-git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git
-cd revision-comparison-skill
-```
-
-Run the following from its root. The destination is `${CODEX_HOME:-$HOME/.codex}/skills/revision-comparison`. An existing installation is preserved.
-
-```sh
-skill_parent="${CODEX_HOME:-$HOME/.codex}/skills"
-skill_target="$skill_parent/revision-comparison"
-if [ -e "$skill_target" ] || [ -L "$skill_target" ]; then
-  printf 'Installation already exists: %s\n' "$skill_target"
-else
-  mkdir -p "$skill_parent" &&
-    cp -R ./skills/revision-comparison "$skill_target"
-fi
-```
-
-The source directory in this command is the skill inside your cloned repository. Start a new session or follow your agent's skill reload instructions after installation.
-
-### Claude Code
-
-For a project installation, run this from the repository root, replacing `/absolute/path/to/project` with your project directory:
-
-```sh
-project_skill_parent="/absolute/path/to/project/.claude/skills"
-project_skill_target="$project_skill_parent/revision-comparison"
-if [ -e "$project_skill_target" ] || [ -L "$project_skill_target" ]; then
-  printf 'Installation already exists: %s\n' "$project_skill_target"
-else
-  mkdir -p "$project_skill_parent" &&
-    cp -R ./skills/revision-comparison "$project_skill_target"
-fi
-```
-
-### Other agents
-
-Ask the agent to read [`SKILL.md`](skills/revision-comparison/SKILL.md) and follow its relative references. Automatic skill discovery depends on the host. This repository provides instructions and assets; it does not provide a standalone revision CLI.
-
-## Compare an existing revision
-
-Use `compare` when you have both versions. The agent compares the supplied text rather than polishing the revised version again.
+### Compare two drafts
 
 ```text
 Use revision-comparison in compare mode.
 Before: drafts/method-v1.tex
 After: drafts/method-v2.tex
 Scope: the feature-extraction subsection.
-Produce a separate Markdown comparison in review/method-comparison/.
+Save the Markdown comparison as review/method-comparison/comparison.md.
 Explain the differences in English. Preserve both supplied versions.
 ```
 
-Reasons supplied by the author can be included as provided reasons. When the agent interprets an edit without an author explanation, the report should identify the reason as inferred. An inference about intent is not evidence that the author intended it.
-
-## Propose a revision and compare it
-
-Use `propose-and-compare` when you want a new draft. State the editing scope and the concrete problem to solve.
+### Propose a language edit
 
 ```text
 Use revision-comparison in propose-and-compare mode on paper/method.tex.
@@ -108,23 +48,143 @@ Editing scope: language-only.
 Goal: clarify which operation acts on the frozen features.
 Preserve the claims, notation, equations, numbers, and citations.
 Use the optional academic style profile.
-Produce a separate Markdown comparison in review/method-proposal/.
+Save the Markdown comparison as review/method-proposal/comparison.md.
 Do not apply the proposal to the manuscript.
 ```
 
-The writing step produces one proposed version; the comparison then traces that same version. The optional profile guides prose choices without starting another independent rewrite.
+**Open the result:** the output directory contains the Markdown comparison, preserved input snapshots, and version identities. A proposal also includes the authoritative revised text. Read the overview for coverage, then use change IDs such as C1 to discuss individual edits. [See a complete example](examples/language-edit/comparison.md).
 
-For grammar correction, use a narrower brief within language-only editing:
+These are prompts for your agent. The repository supplies instructions and assets; it does not contain a standalone revision command.
 
-```text
-Editing scope: language-only.
-Brief: correct grammar and punctuation only; retain sentence structure
-where possible and preserve the author's terminology and voice.
+## Install
+
+The commands below need Git and Python 3.8+. The skill runs in an agent that can read and write local files. The installer copies the complete [`skills/revision-comparison`](skills/revision-comparison) directory, including its references and LaTeX annotation asset.
+
+### Codex · user installation
+
+Copy this block into your terminal from a directory where the new clone should live:
+
+```sh
+git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git
+cd revision-comparison-skill
+python3 scripts/install.py
 ```
 
-For structural work, name the allowed section and the organizational goal. Scientific revision requires access to the relevant support. The [core instructions](skills/revision-comparison/SKILL.md) define these editing boundaries.
+Destination: `~/.agents/skills/revision-comparison`. If you have already cloned the repository, run only the last command from its root. While this repository is private, Git access is required; use your normal GitHub authentication.
 
-## Apply selected edits
+### Claude Code · user installation
+
+From the cloned repository root:
+
+```sh
+python3 scripts/install.py --agent claude-code
+```
+
+Destination: `~/.claude/skills/revision-comparison`.
+
+### Install in one project
+
+Choose one command and replace `/absolute/path/to/project` with an existing project directory. Run it from the cloned repository root.
+
+Codex:
+
+```sh
+python3 scripts/install.py --scope project --project "/absolute/path/to/project"
+```
+
+Claude Code:
+
+```sh
+python3 scripts/install.py --agent claude-code --scope project --project "/absolute/path/to/project"
+```
+
+| Agent | User installation | Project installation |
+| --- | --- | --- |
+| Codex | `~/.agents/skills/revision-comparison` | `<project>/.agents/skills/revision-comparison` |
+| Claude Code | `~/.claude/skills/revision-comparison` | `<project>/.claude/skills/revision-comparison` |
+
+Start a new agent session or follow your host's skill reload instructions. In Codex, select `$revision-comparison`; in Claude Code, invoke `/revision-comparison`. Then provide one of the [quick-start prompts](#quick-start).
+
+<details>
+<summary>Custom paths, existing installations, and other agents</summary>
+
+An exact custom destination overrides the host and scope defaults:
+
+```sh
+python3 scripts/install.py --dest "/custom/skills/revision-comparison"
+```
+
+For an older Codex setup that discovers skills in `CODEX_HOME/skills`, choose that location explicitly:
+
+```sh
+python3 scripts/install.py --dest "${CODEX_HOME:-$HOME/.codex}/skills/revision-comparison"
+```
+
+The installer refuses an existing destination, including a symbolic link, and reports its location. Review an existing installation before updating it. There is no force-overwrite option; a copy failure retains the partial directory for inspection.
+
+Other file-capable agents can read [`SKILL.md`](skills/revision-comparison/SKILL.md) directly and follow its relative references. Automatic discovery depends on the host. The skill itself needs no Python runtime; Python is used only by this optional installer. Manual installation should copy the whole skill directory.
+
+```sh
+python3 scripts/install.py --help
+```
+
+</details>
+
+## Examples
+
+All examples use synthetic material. Each includes the original, revised text, comparison, and file identities.
+
+| Example | What to look for | Open |
+| --- | --- | --- |
+| Language edit | Name the acting component; preserve the frozen-extractor condition | [Report](examples/language-edit/comparison.md) · [Before](examples/language-edit/before.md) · [After](examples/language-edit/after.md) |
+| Structure edit | Track moved and merged passages without losing their source locations | [Report](examples/structure-edit/comparison.md) · [Before](examples/structure-edit/before.md) · [After](examples/structure-edit/after.md) |
+| Meaning review | Expose a removed condition and an uncertain objective reformulation | [Report](examples/semantic-review/comparison.md) · [Before](examples/semantic-review/before.md) · [After](examples/semantic-review/after.md) |
+| Mathematical text | Keep formulas readable in Markdown and a compiled PDF comparison | [Report](examples/math/comparison.md) · [PDF](examples/math/comparison.pdf) · [LaTeX source](examples/math/comparison.tex) |
+
+The banner is a shortened illustration of the [language-edit example](examples/language-edit/comparison.md). Its context is an editor summary; the full report supplies the actual definition and both exact passages with locations. The [SVG source](assets/readme-hero.svg) is editable.
+
+**Try the included material:** open the cloned repository in your agent and paste this prompt. No manuscript is needed.
+
+```text
+Use revision-comparison in compare mode.
+Before: examples/language-edit/before.md
+After: examples/language-edit/after.md
+Scope: both complete files. Preserve the supplied versions.
+Save a new Markdown comparison as review/example-run/comparison.md.
+```
+
+## How it works
+
+`compare` preserves both supplied versions, including any errors, and reports concerns separately. `propose-and-compare` creates one revised version within your editing scope, then traces that same text throughout the report. The optional academic profile guides that writing step.
+
+Author explanations are labeled as provided reasons. If the agent interprets someone else's edit without an explanation, the reason is labeled as inferred. Language-only proposals preserve claims, notation, numbers, equations, citations, and document structure. Structural work needs an authorized scope; scientific changes need relevant evidence. See the [core instructions](skills/revision-comparison/SKILL.md) for the contract.
+
+### More prompts
+
+**Grammar across a manuscript:** provide the entry file and ask for coverage of its included text. Large documents may need several passes; the report should state which sections were covered.
+
+```text
+Use revision-comparison in propose-and-compare mode on paper/main.tex.
+Follow the manuscript's included files in reading order.
+Editing scope: language-only.
+Brief: correct grammar and punctuation throughout the manuscript.
+Retain sentence structure where possible and preserve terminology,
+author voice, claims, equations, numbers, and citations.
+Save the proposal and comparison in review/grammar/; do not apply edits.
+Record covered sections and any text you could not inspect.
+```
+
+**Use paper notes as context:** keep the manuscript as the baseline. Notes can explain a definition or goal; they do not replace the original passage.
+
+```text
+Use revision-comparison in propose-and-compare mode on paper/intro.tex.
+Read notes/paper-context.md for the intended audience and definitions.
+Editing scope: language-only. Goal: clarify the motivation paragraph.
+Identify which context comes from the notes and which from the manuscript.
+Save a Markdown comparison in review/intro/; do not apply edits.
+```
+
+### Apply selected edits
 
 Applying changes is independent of the two content modes. Request it explicitly and identify the version or changes to apply.
 
@@ -172,7 +232,7 @@ The [academic style profile](skills/revision-comparison/references/academic-styl
 
 Academic-Humanizer and research-paper-writing informed the separation between prose preferences and editing permissions. The profile is self-contained; neither skill is required to install or use it. It supports academic clarity rather than AI-detection or disclosure avoidance.
 
-Public documentation is in English. Manuscript language follows the target document, and comparison explanations can use the language you request.
+The documentation is in English. Manuscript language follows the target document, and comparison explanations can use the language you request.
 
 ## Formats and limits
 
@@ -197,10 +257,19 @@ examples/
   semantic-review/    before, after, comparison
   math/               before, after, comparison
 evaluations/cases.md
+scripts/install.py
+tests/test_install.py
+assets/readme-hero.svg       editable banner source
 LICENSE
 ```
 
-The [evaluation cases](evaluations/cases.md) cover representative failure modes without requiring a separate evaluation framework. Contributions should use synthetic or explicitly shareable material and keep the core contract as the authority for editing permissions and fidelity.
+The [evaluation cases](evaluations/cases.md) cover representative failure modes without requiring a separate evaluation framework. Contributions should use synthetic or explicitly shareable material and keep the core contract as the authority for editing permissions and fidelity. To check the installer without touching your actual skill directories:
+
+```sh
+python3 -B -m unittest discover -s tests -p test_install.py -v
+```
+
+The tests use isolated destinations under `.scratch/install-tests/` and retain them for inspection.
 
 ## License
 
