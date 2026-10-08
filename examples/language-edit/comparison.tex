@@ -1,0 +1,58 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=16mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\input{../../skills/revision-comparison/assets/annotations.tex}
+\input{../../skills/revision-comparison/assets/comparison-style.tex}
+\hypersetup{colorlinks=true,linkcolor=rcAdded,urlcolor=rcAdded,
+  pdftitle={Revision Comparison: clarify the acting component},
+  pdfauthor={Raiden-Zhu}}
+\begin{document}
+\rcReportTitle{Revision Comparison}{Clarify the acting component}
+{\small\color{rcMuted}LANGUAGE-ONLY / SYNTHETIC EXAMPLE}
+
+\textbf{Goal.} Name the acting component and shorten one passive construction.
+The model and evaluation remain unchanged.
+
+\begin{rcContext}{Shared context / Method, paragraph 1 / both versions}
+The feature extractor produces $h(x)$ and remains frozen. The gate $g_\theta$ is the only trainable component.
+\end{rcContext}
+
+\begin{rcPassage}{C1}{BEFORE}{Method, paragraph 2}
+\rcrewrite{It} acts on $h(x)$, and \rcrewrite{it} controls which coordinates reach the classifier.
+\end{rcPassage}
+\begin{rcPassage}{C1}{AFTER}{Method, paragraph 2}
+\rcrewrite{The gate $g_\theta$} acts on $h(x)$ and controls which coordinates reach the classifier.
+\end{rcPassage}
+\ifrcannotations
+\begin{rcContext}{C1 / Reason / editor-proposed}
+Name the gate and remove the repeated subject. This clarity edit does not
+mean the original sentence was grammatically invalid.
+\end{rcContext}
+\fi
+{\small\textbf{Meaning and review.} Exposition-only. Checked against the shared
+definition: the gate, features, and coordinate-selection role are preserved.
+No scientific validity audit was performed.}
+
+\begin{rcPassage}{C2}{BEFORE}{Method, paragraph 3}
+\rcrewrite{The gated features are used by the classifier.} The extractor is not updated.
+\end{rcPassage}
+\begin{rcPassage}{C2}{AFTER}{Method, paragraph 3}
+\rcrewrite{The classifier uses the gated features.} The extractor is not updated.
+\end{rcPassage}
+\ifrcannotations
+\begin{rcContext}{C2 / Reason / editor-proposed}
+The shorter active construction names the same consumer. Passive voice is
+not inherently an error; this is an optional expression improvement.
+\end{rcContext}
+\fi
+{\small\textbf{Meaning and review.} Exposition-only. The frozen-extractor condition
+remains verbatim. No formulas, numbers, citations, or evaluation claims change.}
+
+{\footnotesize\color{rcMuted}\textbf{Versions.} \texttt{before.md} and
+\texttt{after.md}; hashes in \texttt{identity.json}.
+\textbf{Coverage.} Both complete source files were compared. C1 and C2 cover
+the changed paragraphs; the title, headings, shared definition, and Evaluation
+are retained. \texttt{after.md} is the sole proposal. No edits are applied.
+This PDF renders the quoted Markdown prose; raw source remains available.}
+\end{document}

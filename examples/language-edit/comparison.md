@@ -2,6 +2,8 @@
 
 This synthetic section describes a gate on frozen features. The requested revision clarifies the acting component and shortens one passive construction. It does not change the model or evaluation.
 
+The [PDF comparison](comparison.pdf) renders the same source passages with the reusable card theme. Its [LaTeX source](comparison.tex) is editable; the [page preview](comparison-preview.png) is rendered directly from the PDF.
+
 - **Mode:** propose-and-compare; language-only.
 - **Versions:** [before.md](before.md) → [after.md](after.md). File identities are recorded in [identity.json](identity.json).
 - **Coverage:** both source files were compared. The Method heading and its first paragraph, the document title, and Evaluation are unchanged. C1 and C2 cover the two changed paragraphs.

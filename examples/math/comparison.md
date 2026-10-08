@@ -1,6 +1,6 @@
 # Grammar edit beside a multiline equation
 
-This synthetic example illustrates a small language correction while preserving the surrounding mathematical setup. It also has an editable [LaTeX comparison](comparison.tex) and a checked [PDF preview](comparison.pdf).
+This synthetic example illustrates a small language correction while preserving the surrounding mathematical setup. The card layout has an editable [LaTeX comparison](comparison-styled.tex), a checked [PDF](comparison-styled.pdf), and a [rendered page preview](comparison-styled-preview.png). The earlier [plain LaTeX comparison](comparison.tex) and [PDF](comparison.pdf) are retained.
 
 - **Mode:** propose-and-compare; language-only, grammar correction.
 - **Versions:** [before.tex](before.tex) → [after.tex](after.tex); [identity.json](identity.json) records the compared source bytes.
@@ -60,11 +60,11 @@ The inline macro colors the changed verb; it does not wrap the `align` environme
 To rebuild from this directory with a local LaTeX installation:
 
 ```sh
-mkdir -p ../../.scratch/math-build
+mkdir -p ../../.scratch/math-style-build
 pdflatex -halt-on-error -interaction=nonstopmode \
-  -output-directory=../../.scratch/math-build comparison.tex
+  -output-directory=../../.scratch/math-style-build comparison-styled.tex
 pdflatex -halt-on-error -interaction=nonstopmode \
-  -output-directory=../../.scratch/math-build comparison.tex
+  -output-directory=../../.scratch/math-style-build comparison-styled.tex
 ```
 
 The preview demonstrates this particular wrapper and multiline equation. Arbitrary manuscript packages or display environments may require different handling.

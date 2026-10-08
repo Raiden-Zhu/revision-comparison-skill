@@ -5,28 +5,76 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">Quick start</a> ·
   <a href="#install">Install</a> ·
   <a href="#examples">Examples</a> ·
+  <a href="#quick-start">Quick start</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="skills/revision-comparison/SKILL.md">Skill instructions</a> ·
   <a href="LICENSE">MIT license</a>
 </p>
 
-Review a revision with the original passage, revised passage, and reason together. Revision Comparison is an agent skill for academic papers and technical documents. It adds the context a reader needs to understand an edit: the acting component, a nearby definition, a distant assumption, or the passage's role in its section.
+An agent skill for reviewing academic revisions: **original passage, revised passage, context, and reason together**. Compare two drafts, or propose a revision from one draft and an editing goal. Markdown is the default; PDF export is optional.
 
-Compare two supplied drafts, or give the agent one draft and an editing goal so it can propose a revision. Both produce a separate review document with exact quotations, locations, and change IDs. Applying edits to the manuscript is a separate request.
+## Install
 
-A small [synthetic example](examples/language-edit/comparison.md), from Method, paragraph 2 in both versions:
+Requires Git and Python 3.8+. Choose one block and run it from a directory that does not already contain `revision-comparison-skill`.
 
-> **Context — editor summary of Method, paragraph 1:** frozen extractor; trainable gate.<br>
-> **Before:** It acts on $h(x)$, and it controls which coordinates reach the classifier.<br>
-> **After:** The gate $g_\theta$ acts on $h(x)$ and controls which coordinates reach the classifier.<br>
-> **Reason — editor-proposed:** name the component and remove the repeated subject.
+### Codex
+
+```sh
+git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
+  python3 revision-comparison-skill/scripts/install.py --agent codex
+```
+
+### Claude Code
+
+```sh
+git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
+  python3 revision-comparison-skill/scripts/install.py --agent claude-code
+```
+
+Start a new agent session, then select `$revision-comparison` in Codex or invoke `/revision-comparison` in Claude Code. [Already cloned, project installation, or custom path?](#advanced-installation)
+
+While the repository is private, cloning requires your normal GitHub access. Existing installations are preserved.
+
+## Examples
+
+Actual PDF exports from synthetic examples. Click a preview to open the PDF.
+
+**Language revision · PDF excerpt** · [Open PDF](examples/language-edit/comparison.pdf) · [Full page](examples/language-edit/comparison-preview.png) · [LaTeX](examples/language-edit/comparison.tex)
+
+<p align="center">
+  <a href="examples/language-edit/comparison.pdf"><img src="examples/language-edit/comparison-detail.png" alt="Excerpt of the actual PDF: shared context, C1 before-and-after passages, editor-proposed reason, and review status." width="860"></a>
+</p>
+
+<details>
+<summary>Mathematical text: a grammar correction with the full equation preserved</summary>
+
+[Open PDF](examples/math/comparison-styled.pdf) · [Editable LaTeX](examples/math/comparison-styled.tex)
+
+<p align="center">
+  <a href="examples/math/comparison-styled.pdf"><img src="examples/math/comparison-styled-preview.png" alt="Actual mathematical revision PDF: full original and revised equations labeled B1 and A1, with the changed verb in purple." width="860"></a>
+</p>
+
+</details>
+
+<details>
+<summary>More examples and source files</summary>
+
+| Example | What to look for | Open |
+| --- | --- | --- |
+| Language edit | Name the acting component; preserve the frozen-extractor condition | [Report](examples/language-edit/comparison.md) · [Before](examples/language-edit/before.md) · [After](examples/language-edit/after.md) |
+| Structure edit | Track moved and merged passages | [Report](examples/structure-edit/comparison.md) · [Before](examples/structure-edit/before.md) · [After](examples/structure-edit/after.md) |
+| Meaning review | Expose a removed condition and an uncertain objective reformulation | [Report](examples/semantic-review/comparison.md) · [Before](examples/semantic-review/before.md) · [After](examples/semantic-review/after.md) |
+| Mathematical text | Preserve the full equation and its conditions | [Report](examples/math/comparison.md) · [Before](examples/math/before.tex) · [After](examples/math/after.tex) |
+
+Each example records the source identities. The banner is a shortened illustration of the language edit; its context is an editor summary. The full report supplies exact passages and locations. The [SVG source](assets/readme-hero.svg) is editable.
+
+</details>
 
 ## Quick start
 
-[Install the skill](#install), open your manuscript project in the agent, then paste one of these prompts. Replace the sample paths with your own.
+Open your manuscript project in the agent and paste a prompt. Replace the sample paths with your own.
 
 ### Compare two drafts
 
@@ -43,105 +91,18 @@ Explain the differences in English. Preserve both supplied versions.
 
 ```text
 Use revision-comparison in propose-and-compare mode on paper/method.tex.
-Scope: the feature-extraction subsection.
-Editing scope: language-only.
+Scope: the feature-extraction subsection. Editing scope: language-only.
 Goal: clarify which operation acts on the frozen features.
-Preserve the claims, notation, equations, numbers, and citations.
+Preserve claims, notation, equations, numbers, and citations.
 Use the optional academic style profile.
 Save the Markdown comparison as review/method-proposal/comparison.md.
 Do not apply the proposal to the manuscript.
 ```
 
-**Open the result:** the output directory contains the Markdown comparison, preserved input snapshots, and version identities. A proposal also includes the authoritative revised text. Read the overview for coverage, then use change IDs such as C1 to discuss individual edits. [See a complete example](examples/language-edit/comparison.md).
-
-These are prompts for your agent. The repository supplies instructions and assets; it does not contain a standalone revision command.
-
-## Install
-
-The commands below need Git and Python 3.8+. The skill runs in an agent that can read and write local files. The installer copies the complete [`skills/revision-comparison`](skills/revision-comparison) directory, including its references and LaTeX annotation asset.
-
-### Codex · user installation
-
-Copy this block into your terminal from a directory where the new clone should live:
-
-```sh
-git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git
-cd revision-comparison-skill
-python3 scripts/install.py
-```
-
-Destination: `~/.agents/skills/revision-comparison`. If you have already cloned the repository, run only the last command from its root. While this repository is private, Git access is required; use your normal GitHub authentication.
-
-### Claude Code · user installation
-
-From the cloned repository root:
-
-```sh
-python3 scripts/install.py --agent claude-code
-```
-
-Destination: `~/.claude/skills/revision-comparison`.
-
-### Install in one project
-
-Choose one command and replace `/absolute/path/to/project` with an existing project directory. Run it from the cloned repository root.
-
-Codex:
-
-```sh
-python3 scripts/install.py --scope project --project "/absolute/path/to/project"
-```
-
-Claude Code:
-
-```sh
-python3 scripts/install.py --agent claude-code --scope project --project "/absolute/path/to/project"
-```
-
-| Agent | User installation | Project installation |
-| --- | --- | --- |
-| Codex | `~/.agents/skills/revision-comparison` | `<project>/.agents/skills/revision-comparison` |
-| Claude Code | `~/.claude/skills/revision-comparison` | `<project>/.claude/skills/revision-comparison` |
-
-Start a new agent session or follow your host's skill reload instructions. In Codex, select `$revision-comparison`; in Claude Code, invoke `/revision-comparison`. Then provide one of the [quick-start prompts](#quick-start).
+Open `comparison.md` to review the changes by ID. Inputs are preserved as snapshots; a proposal also includes its authoritative revised text. These are prompts for your agent, not terminal commands.
 
 <details>
-<summary>Custom paths, existing installations, and other agents</summary>
-
-An exact custom destination overrides the host and scope defaults:
-
-```sh
-python3 scripts/install.py --dest "/custom/skills/revision-comparison"
-```
-
-For an older Codex setup that discovers skills in `CODEX_HOME/skills`, choose that location explicitly:
-
-```sh
-python3 scripts/install.py --dest "${CODEX_HOME:-$HOME/.codex}/skills/revision-comparison"
-```
-
-The installer refuses an existing destination, including a symbolic link, and reports its location. Review an existing installation before updating it. There is no force-overwrite option; a copy failure retains the partial directory for inspection.
-
-Other file-capable agents can read [`SKILL.md`](skills/revision-comparison/SKILL.md) directly and follow its relative references. Automatic discovery depends on the host. The skill itself needs no Python runtime; Python is used only by this optional installer. Manual installation should copy the whole skill directory.
-
-```sh
-python3 scripts/install.py --help
-```
-
-</details>
-
-## Examples
-
-All examples use synthetic material. Each includes the original, revised text, comparison, and file identities.
-
-| Example | What to look for | Open |
-| --- | --- | --- |
-| Language edit | Name the acting component; preserve the frozen-extractor condition | [Report](examples/language-edit/comparison.md) · [Before](examples/language-edit/before.md) · [After](examples/language-edit/after.md) |
-| Structure edit | Track moved and merged passages without losing their source locations | [Report](examples/structure-edit/comparison.md) · [Before](examples/structure-edit/before.md) · [After](examples/structure-edit/after.md) |
-| Meaning review | Expose a removed condition and an uncertain objective reformulation | [Report](examples/semantic-review/comparison.md) · [Before](examples/semantic-review/before.md) · [After](examples/semantic-review/after.md) |
-| Mathematical text | Keep formulas readable in Markdown and a compiled PDF comparison | [Report](examples/math/comparison.md) · [PDF](examples/math/comparison.pdf) · [LaTeX source](examples/math/comparison.tex) |
-
-The banner is a shortened illustration of the [language-edit example](examples/language-edit/comparison.md). Its context is an editor summary; the full report supplies the actual definition and both exact passages with locations. The [SVG source](assets/readme-hero.svg) is editable.
+<summary>Try the included example without a manuscript</summary>
 
 **Try the included material:** open the cloned repository in your agent and paste this prompt. No manuscript is needed.
 
@@ -152,6 +113,8 @@ After: examples/language-edit/after.md
 Scope: both complete files. Preserve the supplied versions.
 Save a new Markdown comparison as review/example-run/comparison.md.
 ```
+
+</details>
 
 ## How it works
 
@@ -242,6 +205,74 @@ The documentation is in English. Manuscript language follows the target document
 
 The skill needs readable source material. If a reference, formula, or passage cannot be recovered faithfully, the agent should disclose the limitation rather than reconstruct it from a guess. Successful compilation validates rendering, not scientific claims.
 
+The included [LaTeX theme](skills/revision-comparison/assets/comparison-style.tex) uses the banner's navy headings, green context and reason cards, subtle borders, and purple revision marks. It changes presentation only. Stacked cards can continue across pages; formulas retain their size and content. PDF export needs a working LaTeX toolchain with the packages listed in the rendering guide.
+
+To request this export, add to your prompt:
+
+```text
+Also export comparison.pdf using the included visual theme.
+Keep the editable LaTeX source and inspect the rendered pages.
+```
+
+## Advanced installation
+
+The installer copies the complete [`skills/revision-comparison`](skills/revision-comparison) directory, including its references and PDF assets. Run the commands below from the cloned repository root.
+
+### Already cloned
+
+Choose one:
+
+```sh
+python3 scripts/install.py --agent codex
+```
+
+```sh
+python3 scripts/install.py --agent claude-code
+```
+
+### Install in one project
+
+Replace `/absolute/path/to/project` with an existing project directory.
+
+Codex:
+
+```sh
+python3 scripts/install.py --scope project --project "/absolute/path/to/project"
+```
+
+Claude Code:
+
+```sh
+python3 scripts/install.py --agent claude-code --scope project --project "/absolute/path/to/project"
+```
+
+| Agent | User installation | Project installation |
+| --- | --- | --- |
+| Codex | `~/.agents/skills/revision-comparison` | `<project>/.agents/skills/revision-comparison` |
+| Claude Code | `~/.claude/skills/revision-comparison` | `<project>/.claude/skills/revision-comparison` |
+
+### Custom paths and other agents
+
+An exact destination overrides the host and scope defaults:
+
+```sh
+python3 scripts/install.py --dest "/custom/skills/revision-comparison"
+```
+
+For an older Codex setup that discovers skills in `CODEX_HOME/skills`:
+
+```sh
+python3 scripts/install.py --dest "${CODEX_HOME:-$HOME/.codex}/skills/revision-comparison"
+```
+
+The installer refuses an existing destination, including a symbolic link, and reports its location. Review an existing installation before updating it. There is no force-overwrite option; a copy failure retains the partial directory for inspection.
+
+Other file-capable agents can read [`SKILL.md`](skills/revision-comparison/SKILL.md) directly and follow its relative references. Automatic discovery depends on the host. The skill itself needs no Python runtime; Python is used only by the optional installer. Manual installation should copy the whole skill directory.
+
+```sh
+python3 scripts/install.py --help
+```
+
 ## Repository layout
 
 ```text
@@ -251,8 +282,9 @@ skills/revision-comparison/
   references/academic-style.md
   references/rendering.md
   assets/annotations.tex
+  assets/comparison-style.tex
 examples/
-  language-edit/       before, after, comparison
+  language-edit/       before, after, comparison, PDF preview
   structure-edit/      before, after, comparison
   semantic-review/    before, after, comparison
   math/               before, after, comparison
