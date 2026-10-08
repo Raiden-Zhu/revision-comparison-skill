@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1260" viewBox="0 0 760 1260" role="img" aria-labelledby="title desc">
+  <title id="title">Revision Comparison — review an edit with its source context</title>
+  <desc id="desc">A synthetic comparison changes a 38% optimization-time claim to a 38% end-to-end-training-time claim. The exact timing protocol excludes feature precomputation. Before and after passages, their source context, an inferred interpretation, and author review status are shown together.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#E8EBF0" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#F7F9FC"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="135%" height="145%">
+      <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#26324D" flood-opacity=".08"/>
+    </filter>
+  </defs>
+  <rect width="760" height="1260" rx="24" fill="#FAFBFD"/>
+  <rect y="361" width="760" height="899" fill="url(#grid)" opacity=".65"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="54" y="45" width="170" height="36" rx="18" fill="#EDE7F3"/>
+    <circle cx="73" cy="63" r="4" fill="#742F75"/>
+    <text x="87" y="69" fill="#5E3069" font-size="17" font-weight="700" letter-spacing="1.4">AGENT SKILL</text>
+    <g fill="#172033" font-family="Georgia, 'Times New Roman', serif" font-size="76" font-weight="700" letter-spacing="-2.8">
+      <text x="52" y="170">Revision</text>
+      <text x="52" y="253">Comparison</text>
+    </g>
+    <text x="56" y="311" fill="#48566B" font-size="27">See what changed. Understand why it matters.</text>
+    <path d="M 57 345 H 103" stroke="#742F75" stroke-width="3" stroke-linecap="round"/>
+    <text x="121" y="351" fill="#566378" font-size="17" letter-spacing=".6">PASSAGES · CONTEXT · REASONS</text>
+
+    <rect x="36" y="386" width="688" height="815" rx="18" fill="url(#paper)" stroke="#DBE1EB" filter="url(#shadow)"/>
+    <text x="66" y="430" fill="#172033" font-size="31" font-weight="700">C3</text>
+    <text x="123" y="430" fill="#647086" font-size="26">Summary / timing claim</text>
+    <text x="66" y="459" fill="#647086" font-size="15" font-weight="700" letter-spacing="1.1">SYNTHETIC COMPARISON · SUPPLIED DRAFTS</text>
+    <path d="M 66 479 H 694" stroke="#E4E8F0"/>
+
+    <rect x="66" y="500" width="628" height="181" rx="9" fill="#EAF1EB"/>
+    <text x="86" y="529" fill="#416748" font-size="17" font-weight="700" letter-spacing="1">CONTEXT · EXACT SOURCE QUOTE</text>
+    <text fill="#35543B" font-size="29" aria-label="Timing starts after feature precomputation and excludes that cost.">
+      <tspan x="86" y="567">Timing starts after feature</tspan>
+      <tspan x="86" y="603">precomputation and excludes</tspan>
+      <tspan x="86" y="639">that cost.</tspan>
+    </text>
+    <text x="86" y="666" fill="#5A7360" font-size="17">After · Evaluation Protocol ¶2 · sentence 2</text>
+
+    <text x="68" y="720" fill="#647086" font-size="18" font-weight="700" letter-spacing="1.2">BEFORE</text>
+    <text fill="#172033" font-size="32" aria-label="The adapter reduces optimization time by 38%.">
+      <tspan x="86" y="760">The adapter reduces</tspan>
+      <tspan x="86" y="800" fill="#742F75">optimization</tspan><tspan xml:space="preserve"> time by 38%.</tspan>
+    </text>
+
+    <text x="68" y="851" fill="#647086" font-size="18" font-weight="700" letter-spacing="1.2">AFTER</text>
+    <text fill="#172033" font-size="32" aria-label="The adapter reduces end-to-end training time by 38%.">
+      <tspan x="86" y="891">The adapter reduces</tspan>
+      <tspan x="86" y="931" fill="#742F75">end-to-end training</tspan><tspan xml:space="preserve"> time by 38%.</tspan>
+    </text>
+
+    <rect x="66" y="960" width="628" height="133" rx="9" fill="#EAF1EB"/>
+    <text x="86" y="990" fill="#416748" font-size="17" font-weight="700" letter-spacing="1">REASON · INFERRED INTERPRETATION</text>
+    <text fill="#35543B" font-size="27" aria-label="The protocol does not establish end-to-end timing.">
+      <tspan x="86" y="1030">The protocol does not establish</tspan>
+      <tspan x="86" y="1066">end-to-end timing.</tspan>
+    </text>
+
+    <rect x="66" y="1114" width="628" height="56" rx="7" fill="#F1F3F8" stroke="#E2E7EF"/>
+    <text x="84" y="1149" fill="#647086" font-size="16" font-weight="700" letter-spacing="1">STATUS</text>
+    <text x="174" y="1149" fill="#172033" font-size="22">Broader claim · author review needed</text>
+    <text x="724" y="1234" text-anchor="end" fill="#647086" font-size="16" letter-spacing=".5">COMPARE MODE · AUTHOR INTENT UNKNOWN</text>
+  </g>
+</svg>

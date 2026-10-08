@@ -1,0 +1,93 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=16mm]{geometry}
+\usepackage{hyperref}
+\input{../../skills/revision-comparison/assets/annotations.tex}
+\input{../../skills/revision-comparison/assets/comparison-style.tex}
+\hypersetup{colorlinks=true,linkcolor=rcAdded,urlcolor=rcAdded,
+  pdftitle={Revision Comparison: the number stays, the claim changes},
+  pdfauthor={Raiden-Zhu}}
+\begin{document}
+\rcReportTitle{Revision Comparison}{The number stays. The claim changes.}
+{\small\color{rcMuted}COMPARE MODE / SYNTHETIC ML EXCERPT}
+
+The revision shortens the method, moves the reporting protocol, and broadens
+a timing claim. Both supplied versions are preserved.
+
+{\small\textbf{In this report:} C1 / concise method \quad
+C2 / moved and merged protocol \quad C3 / timing scope}
+
+\vspace{8pt}
+{\large\bfseries\color{rcInk}C3 / Broaden the timing claim}\par
+{\small\color{rcMuted}The Summary's claim depends on a measurement boundary in another section.}
+
+\begin{rcContext}{Source context / After, Evaluation Protocol, paragraph 2, sentence 2}
+Timing starts after feature precomputation and excludes that cost.
+\end{rcContext}
+{\small\color{rcMuted}Retained from Before, Results, paragraph 3, sentence 2;
+moved by C2. The adapter and baseline use the same cached embeddings and fixed split.}
+
+\begin{rcPassage}{C3}{BEFORE}{Summary, paragraph 1}
+The adapter reduces \rcrewrite{optimization} time by 38\%.
+\end{rcPassage}
+\begin{rcPassage}{C3}{AFTER}{Summary, paragraph 1}
+The adapter reduces \rcrewrite{end-to-end training} time by 38\%.
+\end{rcPassage}
+\ifrcannotations
+\begin{rcContext}{C3 / Explanation / inferred; author intent unknown}
+The value stays at 38\%, but the stated timing scope expands. The supplied
+protocol excludes feature precomputation and does not substantiate
+end-to-end time.
+\end{rcContext}
+\fi
+\textbf{Review / substantive scope change.} Author review needed.
+The wording and timing boundary were checked; the number is not shown to
+be false. Additional measurements may exist. The supplied After is not repaired.
+
+\vfill
+{\footnotesize\color{rcMuted}\textbf{Sources.} \texttt{before.md} and
+\texttt{after.md}; SHA-256 identities in \texttt{identity.json}.
+Paragraphs count prose blocks under each heading. Both complete files are
+compared. No experimental records or author explanations were supplied.}
+
+\newpage
+\rcReportTitle{Useful edits, traced}{The same revision also improves wording and organization}
+
+{\large\bfseries\color{rcInk}C1 / Make the training description more concise}
+\begin{rcPassage}{C1}{BEFORE}{Method, paragraph 1}
+\rcrewrite{We keep the encoder fixed. We compute one embedding per image and store it.
+A small adapter is trained on these stored embeddings.}
+\end{rcPassage}
+\begin{rcPassage}{C1}{AFTER}{Method, paragraph 1}
+\rcrewrite{We cache one embedding per image from a frozen encoder and train a
+small adapter on the cached embeddings.}
+\end{rcPassage}
+{\small\textbf{Inferred benefit.} One sentence connects feature computation,
+storage, and adapter training. The original wording is grammatical.
+\textbf{Review / exposition-only.} The fixed encoder, one embedding per image,
+storage, and training on those embeddings are preserved. Author intent is unknown.}
+
+\vspace{8pt}
+{\large\bfseries\color{rcInk}C2 / Move and merge the reporting protocol}
+\begin{rcPassage}{C2}{BEFORE / 1}{Results, paragraph 2}
+We report mean test accuracy across five seeds.
+\end{rcPassage}
+\begin{rcPassage}{C2}{BEFORE / 2}{Results, paragraph 3}
+We report mean optimization time across five seeds. Timing starts after
+feature precomputation and excludes that cost.
+\end{rcPassage}
+\begin{rcPassage}{C2}{AFTER / merged}{Evaluation Protocol, paragraph 2}
+We report mean test accuracy and mean optimization time across five seeds.
+Timing starts after feature precomputation and excludes that cost.
+\end{rcPassage}
+{\small\textbf{Inferred benefit.} Readers meet the metrics and timing boundary
+together, before the result. \textbf{Review / equivalent reporting description.}
+Both five-seed means and the timing boundary are preserved. The context used by
+C3 was moved, not deleted. Author intent is unknown.}
+
+\vfill
+{\footnotesize\color{rcMuted}\textbf{Coverage.} C1--C3 cover the changed passages.
+The title, headings, baseline definition, evaluation setup, and accuracy result
+are retained; no mapping is unresolved. No edits are applied. Measurement
+validity and statistical significance are not independently verified.
+See \texttt{comparison.md} for the full setup quotation and source anchors.}
+\end{document}

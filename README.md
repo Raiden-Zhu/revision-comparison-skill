@@ -1,7 +1,10 @@
 # Revision Comparison
 
 <p align="center">
-  <img src="assets/readme-hero.png" alt="Revision Comparison: an agent skill that puts before-and-after passages, context, and reasons in one review." width="1400">
+  <picture>
+    <source media="(max-width: 600px)" srcset="assets/readme-hero-context-mobile.png">
+    <img src="assets/readme-hero-context.png" alt="Revision Comparison: the same 38% becomes a broader timing claim. A source quote from another section shows that timing excludes feature precomputation, so the revised claim needs author review." width="1400">
+  </picture>
 </p>
 
 <p align="center">
@@ -53,11 +56,28 @@ While the repository is private, cloning requires your normal GitHub access. Exi
 
 Actual PDF exports from synthetic examples. Click a preview to open the PDF.
 
-**Language revision · PDF excerpt** · [Open PDF](examples/language-edit/comparison.pdf) · [Full page](examples/language-edit/comparison-preview.png) · [LaTeX](examples/language-edit/comparison.tex)
+**Same number, broader claim · synthetic ML revision**
+
+`Optimization time` becomes `end-to-end training time`, with the same 38% reduction. The report brings in the timing protocol from another section: feature precomputation is excluded.
+
+[Open the two-page PDF](examples/contextual-review/comparison.pdf) · [Full report](examples/contextual-review/comparison.md) · [Before](examples/contextual-review/before.md) / [After](examples/contextual-review/after.md) · [LaTeX](examples/contextual-review/comparison.tex)
 
 <p align="center">
-  <a href="examples/language-edit/comparison.pdf"><img src="examples/language-edit/comparison-detail.png" alt="Excerpt of the actual PDF: shared context, C1 before-and-after passages, editor-proposed reason, and review status." width="860"></a>
+  <a href="examples/contextual-review/comparison.pdf"><img src="examples/contextual-review/comparison-detail.png" alt="Actual PDF excerpt, C3: a timing definition from Evaluation Protocol, exact before-and-after Summary sentences, an explanation of the broader metric, and an author-review status." width="860"></a>
 </p>
+
+The full report also traces a useful language edit (**C1**) and two reporting paragraphs moved and merged into one (**C2**). It distinguishes those improvements from the claim that needs review (**C3**).
+
+<details>
+<summary>A simpler language-only proposal</summary>
+
+[Open PDF](examples/language-edit/comparison.pdf) · [Full page](examples/language-edit/comparison-preview.png) · [LaTeX](examples/language-edit/comparison.tex)
+
+<p align="center">
+  <a href="examples/language-edit/comparison.pdf"><img src="examples/language-edit/comparison-detail.png" alt="Actual language-edit PDF: clarify which component acts on frozen features, with an editor-proposed reason." width="860"></a>
+</p>
+
+</details>
 
 <details>
 <summary>Mathematical text: a grammar correction with the full equation preserved</summary>
@@ -75,12 +95,13 @@ Actual PDF exports from synthetic examples. Click a preview to open the PDF.
 
 | Example | What to look for | Open |
 | --- | --- | --- |
+| Contextual review | Read a changed claim against a moved protocol; distinguish scope changes from useful edits | [Report](examples/contextual-review/comparison.md) · [Full page](examples/contextual-review/comparison-preview.png) · [Before](examples/contextual-review/before.md) · [After](examples/contextual-review/after.md) |
 | Language edit | Name the acting component; preserve the frozen-extractor condition | [Report](examples/language-edit/comparison.md) · [Before](examples/language-edit/before.md) · [After](examples/language-edit/after.md) |
 | Structure edit | Track moved and merged passages | [Report](examples/structure-edit/comparison.md) · [Before](examples/structure-edit/before.md) · [After](examples/structure-edit/after.md) |
 | Meaning review | Expose a removed condition and an uncertain objective reformulation | [Report](examples/semantic-review/comparison.md) · [Before](examples/semantic-review/before.md) · [After](examples/semantic-review/after.md) |
 | Mathematical text | Preserve the full equation and its conditions | [Report](examples/math/comparison.md) · [Before](examples/math/before.tex) · [After](examples/math/after.tex) |
 
-Each example records the source identities. The banner is a shortened illustration of the language edit; its context is an editor summary. The full report supplies exact passages and locations. The [SVG source](assets/readme-hero.svg) is editable.
+Each example records the source identities. The banner illustrates C3 from the contextual review using exact sentences and a located source quote. The PDF excerpt is rendered from the actual report. The [desktop](assets/readme-hero-context.svg) and [mobile](assets/readme-hero-context-mobile.svg) SVG sources are editable.
 
 </details>
 
@@ -120,8 +141,8 @@ Open `comparison.md` to review the changes by ID. Inputs are preserved as snapsh
 
 ```text
 Use revision-comparison in compare mode.
-Before: examples/language-edit/before.md
-After: examples/language-edit/after.md
+Before: examples/contextual-review/before.md
+After: examples/contextual-review/after.md
 Scope: both complete files. Preserve the supplied versions.
 Save a new Markdown comparison as review/example-run/comparison.md.
 ```
@@ -296,6 +317,7 @@ skills/revision-comparison/
   assets/annotations.tex
   assets/comparison-style.tex
 examples/
+  contextual-review/  before, after, comparison, PDF preview
   language-edit/       before, after, comparison, PDF preview
   structure-edit/      before, after, comparison
   semantic-review/    before, after, comparison
@@ -303,7 +325,8 @@ examples/
 evaluations/cases.md
 scripts/install.py
 tests/test_install.py
-assets/readme-hero.svg       editable banner source
+assets/readme-hero-context.svg       editable desktop banner
+assets/readme-hero-context-mobile.svg  editable mobile banner
 LICENSE
 ```
 
