@@ -39,12 +39,12 @@
     <text x="745" y="193" fill="#35543B" font-size="22">Timing excludes feature precomputation.</text>
 
     <text x="727" y="238" fill="#647086" font-size="17" font-weight="700" letter-spacing="1.2">BEFORE</text>
-    <text x="730" y="270" fill="#172033" font-size="29">The adapter reduces</text>
+    <text x="730" y="270" fill="#172033" font-size="29">The method reduces</text>
     <rect x="724" y="279" width="168" height="36" rx="5" fill="#F2E6EF"/>
     <text x="730" y="306" fill="#172033" font-size="29">optimization time by 38%.</text>
     <path d="M 741 323 V 342 M 735 336 L 741 342 L 747 336" fill="none" stroke="#8893A7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="727" y="362" fill="#647086" font-size="17" font-weight="700" letter-spacing="1.2">AFTER</text>
-    <text x="730" y="390" fill="#172033" font-size="29">The adapter reduces</text>
+    <text x="730" y="390" fill="#172033" font-size="29">The method reduces</text>
     <rect x="724" y="399" width="256" height="36" rx="5" fill="#F2E6EF"/>
     <text x="730" y="426" fill="#172033" font-size="29"><tspan fill="#742F75">end-to-end training</tspan> time by 38%.</text>
 

@@ -37,12 +37,12 @@
     <text x="86" y="573" fill="#5A7360" font-size="16">After · Evaluation Protocol ¶2</text>
 
     <text x="68" y="628" fill="#647086" font-size="18" font-weight="700" letter-spacing="1.2">BEFORE</text>
-    <text x="86" y="669" fill="#172033" font-size="32">The adapter reduces</text>
+    <text x="86" y="669" fill="#172033" font-size="32">The method reduces</text>
     <rect x="80" y="679" width="184" height="39" rx="5" fill="#F2E6EF"/>
     <text x="86" y="709" fill="#172033" font-size="32">optimization time by 38%.</text>
     <path d="M 98 729 V 750 M 91 743 L 98 750 L 105 743" fill="none" stroke="#8893A7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="68" y="785" fill="#647086" font-size="18" font-weight="700" letter-spacing="1.2">AFTER</text>
-    <text x="86" y="825" fill="#172033" font-size="32">The adapter reduces</text>
+    <text x="86" y="825" fill="#172033" font-size="32">The method reduces</text>
     <rect x="80" y="835" width="282" height="39" rx="5" fill="#F2E6EF"/>
     <text x="86" y="865" fill="#172033" font-size="32"><tspan fill="#742F75">end-to-end training</tspan> time by 38%.</text>
 
