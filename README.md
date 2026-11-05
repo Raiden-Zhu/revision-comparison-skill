@@ -54,14 +54,55 @@ Markdown reports work without LaTeX; omit `--with-pdf` to install only the skill
 
 After installation, invoke `$revision-comparison` in Codex or `/revision-comparison` in Claude Code. If it does not appear, reload the agent or start a new session. [Already cloned, project installation, or custom path?](#advanced-installation)
 
+The prompts below use Codex syntax. In Claude Code, replace the opening `$revision-comparison` with `/revision-comparison`.
+
 The repository is currently private, so you need GitHub access to clone it. The installer leaves existing installations unchanged.
 
 ### Try an example
 
+Open your manuscript project in the agent, replace `manuscript.tex` with your file, and paste:
+
+```text
+$revision-comparison
+Polish manuscript.tex for grammar and clarity.
+Show the edits with their surrounding context.
+Preserve scientific meaning, notation, equations, numbers, and citations.
+Save a revised copy and compile it to a PDF; keep the original unchanged.
+Also export a PDF comparison using the included theme,
+with its Markdown report and editable LaTeX source.
+Put all outputs in a new directory under review/manuscript/.
+```
+
+This produces a polished manuscript and a separate comparison for reviewing the edits.
+
+<details>
+<summary>Only have a PDF?</summary>
+
+Your agent can read the PDF and propose revised passages. The example below saves editable text and a comparison PDF; use the LaTeX source when you want a revised manuscript PDF in its original template.
+
+```text
+$revision-comparison
+Read manuscript.pdf and polish the Introduction for grammar and clarity.
+Show each edit in context.
+Preserve scientific meaning, equations, numbers, and citations.
+Save the revised passages as editable text; keep the original PDF unchanged.
+Identify original passages by page number and quoted anchors.
+Flag unclear text or equations instead of guessing.
+Export a PDF comparison using the included theme,
+and retain its Markdown report and editable LaTeX source.
+Put all outputs in a new directory under review/introduction/.
+```
+
+</details>
+
+<details>
+<summary>Try the included files without a manuscript</summary>
+
 Open the cloned repository in your agent and paste:
 
 ```text
-Use revision-comparison in compare mode.
+$revision-comparison
+Use compare mode.
 Before: examples/contextual-review/before.md
 After: examples/contextual-review/after.md
 Preserve both inputs and compare both complete files.
@@ -70,6 +111,8 @@ Also export a PDF using the included theme and keep the LaTeX source.
 ```
 
 For a Markdown-only report, omit the PDF export line.
+
+</details>
 
 ## Examples
 
@@ -131,7 +174,8 @@ Open your manuscript project in the agent and paste a prompt. Replace the sample
 ### Compare two drafts
 
 ```text
-Use revision-comparison in compare mode.
+$revision-comparison
+Use compare mode.
 Before: drafts/method-v1.tex
 After: drafts/method-v2.tex
 Scope: the feature-extraction subsection.
@@ -142,7 +186,8 @@ Explain the differences in English. Preserve both supplied versions.
 ### Propose a language edit
 
 ```text
-Use revision-comparison in propose-and-compare mode on paper/method.tex.
+$revision-comparison
+Use propose-and-compare mode on paper/method.tex.
 Scope: the feature-extraction subsection. Editing scope: language-only.
 Goal: clarify which operation acts on the frozen features.
 Preserve claims, notation, equations, numbers, and citations.
@@ -164,7 +209,8 @@ The report distinguishes reasons supplied by the author from the agent's own int
 **Polishing during rebuttal:** use reviewer comments to explain the editing goal, with the manuscript as the source for passages and scientific conditions.
 
 ```text
-Use revision-comparison in propose-and-compare mode on paper/method.tex.
+$revision-comparison
+Use propose-and-compare mode on paper/method.tex.
 Read notes/reviewer-comments.md as supporting context.
 Scope: the paragraph describing the timing measurement.
 Editing scope: language-only.
@@ -178,7 +224,8 @@ Leave the supplied manuscript unchanged.
 **Grammar across a manuscript:** give the entry file and ask the agent to check all included text. Large documents may need several passes; the report should state which sections were checked.
 
 ```text
-Use revision-comparison in propose-and-compare mode on paper/main.tex.
+$revision-comparison
+Use propose-and-compare mode on paper/main.tex.
 Follow the manuscript's included files in reading order.
 Editing scope: language-only.
 Brief: correct grammar and punctuation throughout the manuscript.
@@ -191,7 +238,8 @@ Record covered sections and any text you could not inspect.
 **Use paper notes as context:** keep the manuscript as the baseline. Notes can explain a definition or goal; they do not replace the original passage.
 
 ```text
-Use revision-comparison in propose-and-compare mode on paper/intro.tex.
+$revision-comparison
+Use propose-and-compare mode on paper/intro.tex.
 Read notes/paper-context.md for the intended audience and definitions.
 Editing scope: language-only. Goal: clarify the motivation paragraph.
 Identify which context comes from the notes and which from the manuscript.
@@ -203,6 +251,7 @@ Save a Markdown comparison in review/intro/; do not apply edits.
 To apply an edit, tell the agent which revised version or change IDs to use.
 
 ```text
+$revision-comparison
 Apply C1 and C3 from review/method-proposal/comparison.md to
 paper/method.tex. Keep the remaining passages as they are.
 Preserve a baseline and deliver a clean manuscript.
