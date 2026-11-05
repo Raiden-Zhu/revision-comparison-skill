@@ -86,52 +86,11 @@ Choose a workflow, replace the sample paths with your own, and paste the prompt 
 
 | Your starting point | Example |
 | --- | --- |
-| One LaTeX manuscript | **1. Polish and compare** |
-| An editing skill you already use | **2. Edit with another skill, then compare** |
-| Two saved PDF or LaTeX versions | **3. Compare existing drafts** |
+| Two saved PDF or LaTeX versions | **1. Compare existing drafts** |
+| One LaTeX manuscript | **2. Polish and compare** |
+| An editing skill you already use | **3. Edit with another skill, then compare** |
 
-#### 1. Polish and compare
-
-```text
-$revision-comparison
-Polish manuscript.tex for grammar and clarity.
-Show the edits with their surrounding context.
-Preserve scientific meaning, notation, equations, numbers, and citations.
-Save a revised copy and compile it to a PDF; keep the original unchanged.
-Save the comparison and its editable sources with the revised manuscript
-in a new directory under review/manuscript/.
-```
-
-This produces a polished manuscript and a separate comparison for reviewing the edits.
-
-For Markdown-only use, ask for the revised source and a Markdown comparison, and skip PDF compilation.
-
-> [!TIP]
-> **Keep your usual editor.** Another installed skill can make the revision first. Revision Comparison can then compare its saved output with the original, without another rewrite.
-
-<details open>
-<summary><strong>2. Edit with another skill, then compare</strong></summary>
-
-This example uses a separately installed PDF-editing skill named `$pdf`. Replace that name with the skill available in your agent. The editor produces the revised PDF; Revision Comparison reviews the two saved versions.
-
-```text
-$revision-comparison
-Use the installed $pdf skill to polish the Introduction in manuscript.pdf.
-Preserve scientific meaning, equations, numbers, and citations.
-Save the result as manuscript-revised.pdf, keeping the original unchanged.
-Then use compare mode to compare those two PDFs without further edits.
-Show exact Before/After passages, page numbers, relevant context, and notes.
-Flag unclear text or equations instead of guessing.
-Save the comparison and its editable sources
-in a new directory under review/pdf-edit/.
-```
-
-The same sequence works with a writing skill on LaTeX sources. For example, if installed, `$research-paper-writing` can polish the prose, or `$academic-humanizer` can refine its voice; save that revision before comparing it.
-
-</details>
-
-<details open>
-<summary><strong>3. Compare existing drafts (.pdf or .tex)</strong></summary>
+#### 1. Compare existing drafts (.pdf or .tex)
 
 Use this after a revision is already complete, whether you made it yourself or used another editor.
 
@@ -148,6 +107,47 @@ in a new directory under review/two-versions/.
 ```
 
 For LaTeX drafts, replace the two paths with `drafts/manuscript-v1.tex` and `drafts/manuscript-v2.tex`. No additional editing skill is needed.
+
+For Markdown-only use, add: `Output Markdown only; do not compile PDF.`
+
+<details open>
+<summary><strong>2. Polish and compare</strong></summary>
+
+```text
+$revision-comparison
+Polish manuscript.tex for grammar and clarity.
+Show the edits with their surrounding context.
+Preserve scientific meaning, notation, equations, numbers, and citations.
+Save a revised copy and compile it to a PDF; keep the original unchanged.
+Save the comparison and its editable sources with the revised manuscript
+in a new directory under review/manuscript/.
+```
+
+This produces a polished manuscript and a separate comparison for reviewing the edits.
+
+</details>
+
+> [!TIP]
+> **Keep your usual editor.** Another installed skill can make the revision first. Revision Comparison can then compare its saved output with the original, without another rewrite.
+
+<details open>
+<summary><strong>3. Edit with another skill, then compare</strong></summary>
+
+This example uses a separately installed PDF-editing skill named `$pdf`. Replace that name with the skill available in your agent. The editor produces the revised PDF; Revision Comparison reviews the two saved versions.
+
+```text
+$revision-comparison
+Use the installed $pdf skill to polish the Introduction in manuscript.pdf.
+Preserve scientific meaning, equations, numbers, and citations.
+Save the result as manuscript-revised.pdf, keeping the original unchanged.
+Then use compare mode to compare those two PDFs without further edits.
+Show exact Before/After passages, page numbers, relevant context, and notes.
+Flag unclear text or equations instead of guessing.
+Save the comparison and its editable sources
+in a new directory under review/pdf-edit/.
+```
+
+The same sequence works with a writing skill on LaTeX sources. For example, if installed, `$research-paper-writing` can polish the prose, or `$academic-humanizer` can refine its voice; save that revision before comparing it.
 
 </details>
 
