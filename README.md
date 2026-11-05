@@ -32,25 +32,46 @@ An edited passage alone leaves you reconstructing the change. The comparison put
 
 ## Install
 
-Requires Git and Python 3.8+. **We recommend installing LaTeX for PDF reports.** Choose your agent and run one block below to install the skill with PDF support. Start from a directory that does not already contain `revision-comparison-skill`.
+Requires Git and Python 3.8+. Choose **skill only** or **skill + LaTeX setup**, then copy the command for your agent. Start from a directory that does not already contain `revision-comparison-skill`.
 
-### Codex
+### 1. Install the skill
+
+Use this for Markdown reports, or when you already have a working LaTeX installation. PDF export is included in both options; this option installs only the skill.
+
+**Codex**
+
+```sh
+git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
+  python3 revision-comparison-skill/scripts/install.py --agent codex
+```
+
+**Claude Code**
+
+```sh
+git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
+  python3 revision-comparison-skill/scripts/install.py --agent claude-code
+```
+
+<details>
+<summary>2. Install the skill and set up LaTeX for PDF reports</summary>
+
+Choose this if you want the installer to prepare LaTeX as well. The `--with-pdf` option checks for an existing installation, adds missing theme packages, and compiles a small test report. If no compiler is found, it installs [TinyTeX](https://yihui.org/tinytex/) in your user directory. [PDF setup details](#pdf-setup).
+
+**Codex**
 
 ```sh
 git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
   python3 revision-comparison-skill/scripts/install.py --agent codex --with-pdf
 ```
 
-### Claude Code
+**Claude Code**
 
 ```sh
 git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
   python3 revision-comparison-skill/scripts/install.py --agent claude-code --with-pdf
 ```
 
-The `--with-pdf` option reuses an existing LaTeX installation and adds missing theme packages. If LaTeX is absent, it installs [TinyTeX](https://yihui.org/tinytex/) in your user directory. A small PDF build checks the setup. [PDF setup details](#pdf-setup).
-
-Markdown reports work without LaTeX; omit `--with-pdf` to install only the skill.
+</details>
 
 After installation, invoke `$revision-comparison` in Codex or `/revision-comparison` in Claude Code. If it does not appear, reload the agent or start a new session. [Already cloned, project installation, or custom path?](#advanced-installation)
 
@@ -74,6 +95,8 @@ Put all outputs in a new directory under review/manuscript/.
 ```
 
 This produces a polished manuscript and a separate comparison for reviewing the edits.
+
+For Markdown-only use, ask for the revised source and a Markdown comparison, and skip PDF compilation.
 
 <details>
 <summary>Only have a PDF?</summary>
@@ -342,6 +365,8 @@ python3 scripts/install.py --agent codex --with-pdf
 ```
 
 The setup checks for a LaTeX compiler and the [theme's packages](skills/revision-comparison/references/rendering.md#latex-and-pdf), adds missing packages through TeX Live or MiKTeX, and compiles a small report with context cards and an equation. It does not upgrade the rest of your TeX installation or change your shell configuration. An older or restricted TeX installation may need attention from its package manager before setup can finish; failures keep the skill available for Markdown reports.
+
+Detection first looks for `pdflatex`, `xelatex`, or `lualatex` on `PATH`, then checks common MacTeX and TinyTeX locations, including the toolchain installed by this repository. It uses `kpsewhich` to locate the required files, writes a standalone `check.tex` in a temporary directory, and compiles it with the bundled theme. A successful compiler exit and a generated PDF confirm that the theme can be built. Custom installation directories need to be on `PATH`. An existing installation that fails these checks is preserved, with the problem reported for repair.
 
 If no compiler is found, setup downloads the official TinyTeX bundle for macOS, Linux (x86-64 or ARM64), or Windows. It installs in `~/.local/share/revision-comparison/TinyTeX`, without replacing another distribution. Linux and macOS need Perl to install TeX packages. Downloads require internet access.
 
