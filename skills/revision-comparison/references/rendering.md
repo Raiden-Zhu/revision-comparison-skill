@@ -4,7 +4,11 @@ The comparison should be readable before it is decorative. Keep exact passages, 
 
 ## LaTeX and PDF
 
-PDF with editable TeX is the default comparison output when the existing environment can build it. Finish the comparison content and keep a complete Markdown companion before export. Generate TeX from the same comparison without another rewrite. For an explicit Markdown-only request, skip all PDF checks and compilation.
+PDF with editable TeX is the default comparison output when the existing environment can build it. Finish the comparison content and keep a complete Markdown companion before export. Reuse the finalized passages and explanations across formats; change presentation and document any mathematical or label mappings, without rephrasing the notes during export. For an explicit Markdown-only request, skip all PDF checks and compilation.
+
+Start with a brief orientation and, when useful, a compact change index. Place necessary context near the affected passages. Use one concise editorial note for a change's effect and any local uncertainty; put detailed identities, dependencies, and shared verification limits at the end or in companion files. Keep source locations in the passage heading or a single adjacent line rather than repeating them throughout each card.
+
+Let change units flow continuously; do not insert a page break before each edit. Short pairs can share a page. Keep a pair together when readable, or on adjacent pages, while allowing long passages and formulas to break naturally. Reduce repeated framing before reducing space or type size. Do not place an entire long change unit in an unbreakable container.
 
 Compile the generated standalone wrapper through the included helper:
 
@@ -28,9 +32,11 @@ For a new standalone PDF comparison, use the [visual theme](../assets/comparison
 
 Load `annotations.tex`, then `comparison-style.tex`, using paths relative to the wrapper. Use `\rcReportTitle{Title}{Subtitle}`, `rcContext` for context or reason cards, and `\begin{rcPassage}{C1}{BEFORE}{Short location}` for each passage. Keep the third argument short; put longer paths or anchors in the body. Page size and margins belong to the wrapper. The theme uses Latin Modern, `tcolorbox` with its `breakable` and `skins` libraries, and `fancyhdr`, available in common TeX distributions. Missing required packages move the helper to another candidate or the Markdown fallback; they do not authorize dependency installation.
 
-The cards can break across pages and repeat the change ID and side heading. Keep the original font size for prose and equations; do not make a fixed-height box or shrink content to reproduce a screenshot. Wrap optional reason cards in `\ifrcannotations ... \fi` when they should follow the annotation switch. The [language example](https://github.com/Raiden-Zhu/revision-comparison-skill/blob/main/examples/language-edit/comparison-readable.tex) and [mathematical example](https://github.com/Raiden-Zhu/revision-comparison-skill/blob/main/examples/math/comparison-styled-readable.tex) are complete editable wrappers.
+The cards can break across pages and repeat the change ID and side heading. Keep the original font size for prose and equations; do not make a fixed-height box or shrink content to reproduce a screenshot. Reserve `\ifrcannotations ... \fi` for optional editorial reasons. Meaning changes, absent-counterpart notes, missing support, and unresolved scientific issues must remain visible with annotations off. The [language example](https://github.com/Raiden-Zhu/revision-comparison-skill/blob/main/examples/language-edit/comparison-readable.tex) and [mathematical example](https://github.com/Raiden-Zhu/revision-comparison-skill/blob/main/examples/math/comparison-styled-readable.tex) are complete editable wrappers.
 
 The optional [annotation macros](../assets/annotations.tex) provide text colors and switchable notes, not a diff engine or document renderer. Use `\rcadd{...}` and `\rcrewrite{...}` for ordinary inline text or short inline math. Do not wrap arbitrary paragraphs, display math, `align`, verbatim content, or fragile commands in these macros. Use labels and notes around complex blocks instead.
+
+Typeset readable context as normal prose and mathematics when the supplied definitions allow it, retaining exact source in the snapshots. Use literal source blocks for unresolved or broken syntax and identify the limitation. Place editorial summaries and absent-counterpart explanations outside source quotations, or label them explicitly as editorial notes. Highlight unambiguously aligned replacement spans on both sides; do not color unchanged sentences to mark a one-word edit.
 
 Build a standalone wrapper with the source packages and definitions actually needed. Prefix labels with names such as `before:...` and `after:...`. Manage equation counters and hyperlink destinations separately, and use separate bibliography contexts if the versions have conflicting citation keys or entries. Record any renamed labels as presentation mappings; preserve the equations and their conditions. For an unresolved external reference, show its source label or number when known and state that it has not been resolved. A readable label is not verification of the reference's meaning or support.
 
@@ -42,9 +48,11 @@ Compile with the available LaTeX toolchain and check errors, unresolved referenc
 
 ## Markdown
 
-Use headings for change IDs and locations, followed by Context, Before, After, and a concise explanation and review note. Fenced blocks preserve source characters when math, markup, or citation syntax would otherwise be interpreted. Unchanged context must be identifiable as context, not another edited passage.
+Use headings for change IDs and locations, Before/After passages, context where needed, and a concise note on the change and its effect. Fenced blocks preserve source characters when math, markup, or citation syntax would otherwise be interpreted. Unchanged context must be identifiable as context, not another edited passage.
 
 For a long report, link a change index to its headings. Do not put long passages in a wide table or insert color markup into equations. Multiple original or revised passages belong under one ID for a split or merge. State an absent counterpart explicitly.
+
+Keep a table's header, separator, and data rows contiguous, without blank lines between them. Check index links and basic Markdown rendering with an available renderer, or inspect the syntax when no renderer is installed; report the check actually performed without adding a dependency for it.
 
 ## Clean and annotated outputs
 

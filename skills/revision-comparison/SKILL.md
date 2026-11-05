@@ -27,17 +27,16 @@ Keep supplied versions and earlier comparison packages unchanged. For proposed e
 
 ## Build the comparison
 
-Open with a short orientation: what the document or section does, the user's revision goal, the selected scope and constraints, the two version identities, and the comparison granularity. State covered and omitted sections or unresolved mappings. Do not invent a manuscript purpose from a fragment.
+Open with a brief orientation: what is being compared, the user's goal, the selected scope and constraints, and the two version identities. State omissions or unresolved mappings. Put detailed identities, dependencies, and shared verification limits in a closing note or companion record. Do not invent a manuscript purpose from a fragment.
 
-Use a compact change index for a long report. Assign IDs such as C1 and C2, stable within this comparison package. Each change unit contains:
+Use a compact change index for a long report, then get to the passages. Assign IDs such as C1 and C2, stable within this comparison package. Each change unit provides:
 
-1. **Context, when needed.** Explain the passage's editor-assigned role briefly. Quote unchanged surrounding text, a definition, or a condition when the reader needs it, with its location and version. Label an editorial summary as a summary; it cannot replace the actual passages. Choose context by the dependency, not a fixed number of neighboring sentences. If necessary context is missing, say what remains unverified. Reuse shared context by reference rather than repeating it in every unit.
+1. **Context, when needed.** Quote the surrounding text, definition, or condition needed to judge the change, with its location and version. Place it near the first affected passage; reuse shared context by reference when that remains easy to follow. Label any editorial summary as a summary; it cannot replace the actual passages. Choose context by the dependency, not a fixed number of neighboring sentences. If necessary context is missing, say what remains unverified.
 2. **Before.** Give the original location and actual passage, including relevant formulas.
 3. **After.** Give the revised location and corresponding actual passage. For additions or deletions, explicitly state that the other side has no counterpart and show the insertion or deletion context.
-4. **Explanation.** Name what changed and explain how it affects the passage, using specific quantities, conditions, or referents. Distinguish author-provided reasons, editor-proposed reasons, inferred benefits, and unknown intent. A supplied reason may still conflict with the text. Avoid generic explanations such as "more academic."
-5. **Meaning and review status.** Identify exposition-only, equivalent, substantive, or uncertain changes. State what was checked and what was not. A claim of mathematical equivalence needs an actual justification; identical tokens or successful compilation do not establish it.
+4. **Change and effect.** Briefly explain the change and its effect, using specific quantities, conditions, or referents. Identify whether it is exposition-only, equivalent, substantive, or uncertain, and include any check or unresolved issue that matters to this passage. Distinguish author-provided reasons from editorial explanations or inferred benefits; do not invent intent. A supplied reason may conflict with the text. A claim of mathematical equivalence needs an actual justification; identical tokens or successful compilation do not establish it.
 
-For routine language fixes, keep the explanation and review status brief. Group nearby fixes when they belong to one coherent passage; do not turn each punctuation mark into a review form.
+These are information requirements, not a separate card or heading for every item. Routine language fixes usually need only a short note. Combine the explanation and review status rather than repeating them, and state shared limitations once; keep passage-specific scientific concerns beside the affected change. Group nearby fixes when they belong to one coherent passage. Preserve complete sentences, relevant formulas, and their conditions instead of trimming the evidence to save space.
 
 Use section names and faithfully quoted anchors; add file names, paragraph IDs, occurrence numbers, or source lines when reliable. A line number alone is fragile. If repeated text prevents a unique mapping, mark the ambiguity instead of inventing a precise correspondence.
 
@@ -45,9 +44,11 @@ Account for changes across the selected scope, including deleted material and ad
 
 ## Highlight and check
 
-Use passage-level annotations by default. Use word-level highlighting only where alignment has been checked. Keep unchanged text black. In color output, use blue `#005587` for added text, purple `#742F75` for rewritten text, and muted green `#416748` for movement, reformatting, and notes. Pair colors with explicit labels and IDs. In Markdown, labels and headings carry the meaning; do not rely on client-specific color rendering.
+Use explicit change IDs and Before/After labels. For a short replacement whose alignment has been checked, highlight the changed spans on both sides without changing source characters. Otherwise use passage-level annotations without implying a word-level match. Keep unchanged text black. In color output, use blue `#005587` for added text, purple `#742F75` for rewritten text, and muted green `#416748` for movement, reformatting, and notes. In Markdown, labels and headings carry the meaning; do not rely on client-specific color rendering.
 
 Keep a before/after pair together when readable, or on immediately adjacent pages. Stack long prose and equations; use columns only when both sides remain legible. A pure move can display the passage once with both locations. Do not obscure formulas with deletion marks or shorten them to fit the layout.
+
+Let short change units share a page rather than starting each on a new one. Clearly separate quoted manuscript text from editorial notes, including explanations of absent counterparts. Essential meaning changes and unresolved issues remain visible when optional annotations are switched off.
 
 Check each changed unit with the context needed to interpret it: definitions, conditions, referents, claim strength, citation attachment, comparators, and mathematical details. Explain substantive or uncertain changes even when comparing user-supplied versions. This is a scoped review of changes, not a full proof, citation, or scientific audit.
 

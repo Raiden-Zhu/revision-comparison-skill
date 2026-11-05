@@ -20,6 +20,9 @@ Formatting checks do not establish good editing decisions. The checks below conc
 | Private setup | Existing TeX is missing packages and optional setup is requested. | Only installer-marked private TinyTeX may receive packages. System TeX, unrelated user trees, and unmarked directories are preserved. |
 | Rationale conflict | Supply a reason saying “formatting only,” but change a formula or result. | The supplied reason is attributed and its conflict with the actual change is reported. Supplied does not automatically mean verified. |
 | Partial or stale application | Select dependent changes, or change the source/proposal after review. | The agent checks the selected version and target, reports drift or dependency conflicts, and does not silently regenerate wording or apply extra changes. No atomic-write guarantee is inferred. |
+| Compact contextual report | Compare several short edits, including a changed result and a condition defined in another section. | The report reaches the passages promptly, short units share pages, necessary context stays near the relevant change, and repeated review framing does not crowd out the actual comparison. All changes remain represented. |
+| Export fidelity and quotation boundaries | Deliver the same comparison in Markdown and PDF, including an addition or deletion. | Explanations are reused without rephrasing, manuscript quotations remain exact, editorial notes are distinguishable from source text, index links work, and Markdown tables render as tables. |
+| Annotations off | Export the comparison with optional annotations disabled. | The Before/After text, absent-counterpart labels, substantive meaning changes, and unresolved issues remain visible. Only optional explanations and visual annotations disappear. |
 
 ## Small raw fixtures
 

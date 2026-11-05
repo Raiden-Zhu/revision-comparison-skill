@@ -3,6 +3,7 @@
 \definecolor{rcAdded}{RGB}{0,85,135}
 \definecolor{rcRewritten}{RGB}{116,47,117}
 \definecolor{rcNote}{RGB}{65,103,72}
+\colorlet{rcMoved}{rcNote} % Keep the legacy color name for existing wrappers.
 \newif\ifrcannotations
 \rcannotationstrue
 \newcommand{\rcadd}[1]{\ifrcannotations\textcolor{rcAdded}{#1}\else#1\fi}
