@@ -56,7 +56,7 @@ git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
 <details>
 <summary>2. Install the skill and set up LaTeX for PDF reports</summary>
 
-Choose this if you want the installer to prepare LaTeX as well. The `--with-pdf` option checks for an existing installation, adds missing theme packages, and compiles a small test report. If no compiler is found, it installs [TinyTeX](https://yihui.org/tinytex/) in your user directory. [PDF setup details](#pdf-setup).
+Choose this if you want the installer to prepare LaTeX as well. The `--with-pdf` option reuses an existing installation that passes the theme check. If none passes, it prepares a private [TinyTeX](https://yihui.org/tinytex/) and adds the required packages there. Other TeX installations are preserved. [PDF setup details](#pdf-setup).
 
 **Codex**
 
@@ -270,7 +270,7 @@ Save the comparison and its editable sources in review/method-proposal/.
 Do not apply the proposal to the manuscript.
 ```
 
-Open `comparison.pdf` to review the changes by ID, or `comparison.md` when PDF export is unavailable. The output includes copies of your inputs and, for a proposed edit, the exact revised text. Paste these prompts into your agent.
+Open the returned PDF (`comparison.pdf` by default) to review the changes by ID, or `comparison.md` when PDF export is unavailable. The output includes copies of your inputs and, for a proposed edit, the exact revised text. Paste these prompts into your agent.
 
 ## How it works
 
@@ -413,11 +413,11 @@ Add `--with-pdf` to any installation command to set up LaTeX as well. This can b
 python3 scripts/install.py --agent codex --with-pdf
 ```
 
-The setup checks for a LaTeX compiler and the [theme's packages](skills/revision-comparison/references/rendering.md#latex-and-pdf), adds missing packages through TeX Live or MiKTeX, and compiles a small report with context cards and an equation. It does not upgrade the rest of your TeX installation or change your shell configuration. An older or restricted TeX installation may need attention from its package manager before setup can finish; failures keep the skill available for Markdown reports.
+Setup tries up to three existing compiler candidates and checks the [theme's packages](skills/revision-comparison/references/rendering.md#latex-and-pdf) with a small report containing context cards and an equation. It reuses the first suitable environment. Existing TeX installations and `~/texmf` are never patched or upgraded; the installer adds packages only inside its own marked private TinyTeX. Shell configuration is left unchanged.
 
-Detection first looks for `pdflatex`, `xelatex`, or `lualatex` on `PATH`, then checks common MacTeX and TinyTeX locations, including the toolchain installed by this repository. It uses `kpsewhich` to locate the required files, writes a standalone `check.tex` in a temporary directory, and compiles it with the bundled theme. A successful compiler exit and a generated PDF confirm that the theme can be built. Custom installation directories need to be on `PATH`. An existing installation that fails these checks is preserved, with the problem reported for repair.
+Detection checks `PATH` and common MacTeX, TinyTeX, and Windows MiKTeX locations, preserving the engine names and deduplicating equivalent paths. Candidates from different installations are tried before sibling engines in the same installation. Each candidate's theme preflight has a 15-second limit. A failed candidate moves to the next one. Custom compiler paths can be supplied directly with the helper's `--engine` option.
 
-If no compiler is found, setup downloads the official TinyTeX bundle for macOS, Linux (x86-64 or ARM64), or Windows. It installs in `~/.local/share/revision-comparison/TinyTeX`, without replacing another distribution. Linux and macOS need Perl to install TeX packages. Downloads require internet access.
+If no existing candidate passes and PDF setup was requested, setup downloads the official TinyTeX bundle for macOS, Linux (x86-64 or ARM64), or Windows. It installs in `~/.local/share/revision-comparison/TinyTeX` and marks the directory as installer-owned. Existing unmarked contents at that path are preserved for manual review. Linux and macOS need Perl to install TeX packages. Downloads require internet access.
 
 To check an existing setup without downloading or installing anything:
 
@@ -426,6 +426,14 @@ python3 skills/revision-comparison/scripts/setup_pdf.py --check
 ```
 
 The check prints the compiler's full path and the test PDF location. New skill installations include the same helper, so your agent can find this toolchain even when it is not on `PATH`. If you keep an older skill installation, use the repository helper above and give your agent the printed compiler path. Manuscripts with additional fonts, languages, or custom packages may need further dependencies.
+
+For a generated comparison wrapper, the agent uses the same helper to compile the actual report:
+
+```sh
+python3 skills/revision-comparison/scripts/setup_pdf.py --compile review/two-versions/comparison.tex
+```
+
+The report's attempts share a 120-second automatic execution budget: at most three compiler candidates, 60 seconds per compiler process, and two further calls after wrapper repairs. Normal cross-reference passes are handled within a build. Optional page previews use an already installed `pdftoppm`, with a 30-second limit inside the same budget. The helper returns the PDF path or a clear Markdown fallback reason and keeps logs in the report directory. It preserves existing PDFs and writes a new output name when necessary. `--engine` prefers a specific compiler; `--unicode` prefers XeLaTeX/LuaLaTeX. The agent still inspects the rendered pages before reporting visual quality.
 
 ### Already cloned
 

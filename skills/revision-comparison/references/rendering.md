@@ -4,15 +4,29 @@ The comparison should be readable before it is decorative. Keep exact passages, 
 
 ## LaTeX and PDF
 
-PDF with editable TeX is the default comparison output when the existing environment can build it. Keep a Markdown companion. For an explicit Markdown-only request, skip PDF preflight and compilation.
+PDF with editable TeX is the default comparison output when the existing environment can build it. Finish the comparison content and keep a complete Markdown companion before export. Generate TeX from the same comparison without another rewrite. For an explicit Markdown-only request, skip all PDF checks and compilation.
 
-If no working LaTeX toolchain is known, run `python3 <skill-directory>/scripts/setup_pdf.py --check`. The helper checks the comparison theme with a small PDF build and prints the compiler's full path. It also finds the user-local TinyTeX toolchain created by the repository's `--with-pdf` installer, even when it is not on `PATH`. Use that full compiler path for the report. The check never installs anything; `--install` is for an explicitly requested LaTeX setup.
+Compile the generated standalone wrapper through the included helper:
 
-If the default theme's preflight fails, complete the comparison in Markdown and explain the missing compiler, dependency, or failed check. If a later report build fails, fix presentation problems in the wrapper; if it still cannot be built, deliver Markdown and retain the useful TeX and build diagnostics. Report an unavailable visual check explicitly. Software or package installation is a separate setup task, not part of this fallback. For a user-supplied layout, check its actual requirements rather than treating the bundled theme's dependencies as mandatory.
+```sh
+python3 <skill-directory>/scripts/setup_pdf.py --compile /absolute/path/to/comparison.tex
+```
+
+The helper checks `PATH`, known installation directories, and the private TinyTeX directory. It tries at most three distinct candidates, covering different installations before sibling engines. `--engine /path/to/compiler` puts a user-specified or previously successful compiler first; `--unicode` prefers XeLaTeX/LuaLaTeX for Unicode text. Choose existing fonts and the packages the actual report needs. A generic English test page does not establish that another language or custom layout will render.
+
+The helper returns JSON with the selected compiler, output path, diagnostics, preview status, and remaining budget:
+
+- `pdf-ready`: inspect the returned PDF and available PNG previews. Rendering previews does not replace visual inspection. Existing PDFs are preserved by choosing a new output name when needed.
+- `needs-repair`: read the log and fix presentation or escaping in the wrapper, then call the helper again. At most two further calls are permitted; ordinary cross-reference passes are handled inside a build. Do not change source quotations or scientific content to satisfy compilation.
+- `markdown-fallback`: deliver the completed Markdown, useful TeX, and the concrete reason. No installation is attempted.
+
+All attempts for one report share a 120-second automatic execution budget, with 60 seconds per compiler process and 30 seconds for optional rendering through an already installed `pdftoppm`. Timeouts stop that task's process tree. The local `.comparison.pdf-build.json` records the cumulative budget and retry count. Keep retries in the same directory; do not reset the state or move the same task to another directory to evade limits. A new user-requested comparison gets a new output directory. External input or style changes are rebuilt even if the wrapper is unchanged.
+
+For a separate environment diagnostic, `python3 <skill-directory>/scripts/setup_pdf.py --check` tests the bundled theme, with at most 15 seconds per candidate. Normal report compilation tests the actual wrapper directly, so a custom layout is not blocked by unused theme dependencies. `--install` is a separate, explicitly requested setup action; it can maintain only the installer-marked private TinyTeX and never patches another distribution or `~/texmf`.
 
 For a new standalone PDF comparison, use the [visual theme](../assets/comparison-style.tex) unless the user supplies another layout. It provides navy headings, light Before/After cards, and green context and reason cards, with the same annotation colors as the core skill. The theme changes presentation only; source text, editing scope, reasons, and verification remain governed by the comparison contract.
 
-Load `annotations.tex`, then `comparison-style.tex`, using paths relative to the wrapper. Use `\rcReportTitle{Title}{Subtitle}`, `rcContext` for context or reason cards, and `\begin{rcPassage}{C1}{BEFORE}{Short location}` for each passage. Keep the third argument short; put longer paths or anchors in the body. Page size and margins belong to the wrapper. The theme uses Latin Modern, `tcolorbox` with its `breakable` and `skins` libraries, and `fancyhdr`, available in common TeX distributions. Missing required packages trigger the Markdown fallback unless the user requests another layout that the existing toolchain can compile.
+Load `annotations.tex`, then `comparison-style.tex`, using paths relative to the wrapper. Use `\rcReportTitle{Title}{Subtitle}`, `rcContext` for context or reason cards, and `\begin{rcPassage}{C1}{BEFORE}{Short location}` for each passage. Keep the third argument short; put longer paths or anchors in the body. Page size and margins belong to the wrapper. The theme uses Latin Modern, `tcolorbox` with its `breakable` and `skins` libraries, and `fancyhdr`, available in common TeX distributions. Missing required packages move the helper to another candidate or the Markdown fallback; they do not authorize dependency installation.
 
 The cards can break across pages and repeat the change ID and side heading. Keep the original font size for prose and equations; do not make a fixed-height box or shrink content to reproduce a screenshot. Wrap optional reason cards in `\ifrcannotations ... \fi` when they should follow the annotation switch. The [language example](https://github.com/Raiden-Zhu/revision-comparison-skill/blob/main/examples/language-edit/comparison-readable.tex) and [mathematical example](https://github.com/Raiden-Zhu/revision-comparison-skill/blob/main/examples/math/comparison-styled-readable.tex) are complete editable wrappers.
 

@@ -38,7 +38,7 @@ Copy failures retain the partial installation and report its location.
     result.add_argument("--scope", choices=("user", "project"), default="user")
     result.add_argument("--project", type=Path, help="Existing project directory; required for project scope unless --dest is used.")
     result.add_argument("--dest", type=Path, help="Exact installation directory; overrides agent/scope destinations.")
-    result.add_argument("--with-pdf", action="store_true", help="Also check LaTeX, install it if absent, and add missing PDF-theme packages.")
+    result.add_argument("--with-pdf", action="store_true", help="Reuse working LaTeX or prepare a private TinyTeX; never change another TeX installation.")
     return result
 
 
