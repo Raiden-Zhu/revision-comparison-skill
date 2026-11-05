@@ -17,7 +17,7 @@
   <a href="LICENSE">MIT license</a>
 </p>
 
-An agent skill for reviewing academic revisions. Compare two drafts, or propose a revision from one draft and an editing goal. Markdown is the default; PDF export is optional.
+Revision Comparison is an agent skill for reviewing manuscript revisions in context. It brings original and revised passages, relevant context, and revision notes together, so you can decide which edits to keep.
 
 ## Why this skill
 
@@ -32,7 +32,7 @@ An edited passage alone leaves you reconstructing the change. The comparison put
 
 ## Install
 
-Requires Git and Python 3.8+. Choose one block and run it from a directory that does not already contain `revision-comparison-skill`.
+Requires Git and Python 3.8+. Choose your agent and run one block from a directory that does not already contain `revision-comparison-skill`. The installer copies the complete skill directory, including its references and assets.
 
 ### Codex
 
@@ -48,9 +48,26 @@ git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
   python3 revision-comparison-skill/scripts/install.py --agent claude-code
 ```
 
-Start a new agent session, then select `$revision-comparison` in Codex or invoke `/revision-comparison` in Claude Code. [Already cloned, project installation, or custom path?](#advanced-installation)
+After installation, invoke `$revision-comparison` in Codex or `/revision-comparison` in Claude Code. If it does not appear, reload the agent or start a new session. [Already cloned, project installation, or custom path?](#advanced-installation)
 
 The repository is currently private, so you need GitHub access to clone it. The installer leaves existing installations unchanged.
+
+Markdown reports work without LaTeX. PDF export requires a working LaTeX installation with the [theme's packages](skills/revision-comparison/references/rendering.md#latex-and-pdf).
+
+### Try an example
+
+Open the cloned repository in your agent and paste:
+
+```text
+Use revision-comparison in compare mode.
+Before: examples/contextual-review/before.md
+After: examples/contextual-review/after.md
+Preserve both inputs and compare both complete files.
+Save the report in a new directory under review/example-run/.
+Also export a PDF using the included theme and keep the LaTeX source.
+```
+
+For a Markdown-only report, omit the PDF export line.
 
 ## Examples
 
@@ -60,7 +77,7 @@ PDF reports from synthetic examples. Click a preview to open the PDF.
 
 The number stays at 38%, but `optimization time` becomes `end-to-end training time`. The report shows the timing definition from another section: the clock starts after feature precomputation.
 
-[Open the two-page PDF](examples/contextual-review/comparison-readable.pdf) · [Full report](examples/contextual-review/comparison.md) · [Before](examples/contextual-review/before.md) / [After](examples/contextual-review/after.md) · [LaTeX](examples/contextual-review/comparison-readable.tex)
+[Open the two-page PDF](examples/contextual-review/comparison-readable.pdf) · [Markdown report](examples/contextual-review/comparison.md) · [Before](examples/contextual-review/before.md) / [After](examples/contextual-review/after.md) · [LaTeX](examples/contextual-review/comparison-readable.tex)
 
 <p align="center">
   <a href="examples/contextual-review/comparison-readable.pdf"><img src="examples/contextual-review/comparison-readable-detail.png" alt="PDF excerpt, C3: the timing definition from Evaluation Protocol, the original and revised Summary sentences, and a review note explaining which timing measure the 38% refers to." width="860"></a>
@@ -134,21 +151,6 @@ Do not apply the proposal to the manuscript.
 
 Open `comparison.md` to review the changes by ID. The output includes copies of your inputs and, for a proposed edit, the exact revised text. Paste these prompts into your agent.
 
-<details>
-<summary>Try the included example without a manuscript</summary>
-
-Open the cloned repository in your agent and paste this prompt:
-
-```text
-Use revision-comparison in compare mode.
-Before: examples/contextual-review/before.md
-After: examples/contextual-review/after.md
-Scope: both complete files. Preserve the supplied versions.
-Save a new Markdown comparison as review/example-run/comparison.md.
-```
-
-</details>
-
 ## How it works
 
 `compare` preserves the supplied versions and shows their differences, with concerns reported separately. `propose-and-compare` writes a revision within your requested scope and compares it with the original. The optional academic profile guides the writing.
@@ -156,6 +158,20 @@ Save a new Markdown comparison as review/example-run/comparison.md.
 The report distinguishes reasons supplied by the author from the agent's own interpretation. For an existing revision, the agent labels its own interpretation as inferred when no author explanation is available. Language-only proposals preserve claims, notation, numbers, equations, citations, and document structure. Structural edits follow the scope you request; changes to claims or mathematics need supporting evidence. See the [skill instructions](skills/revision-comparison/SKILL.md) for the editing rules.
 
 ### More prompts
+
+**Polishing during rebuttal:** use reviewer comments to explain the editing goal, with the manuscript as the source for passages and scientific conditions.
+
+```text
+Use revision-comparison in propose-and-compare mode on paper/method.tex.
+Read notes/reviewer-comments.md as supporting context.
+Scope: the paragraph describing the timing measurement.
+Editing scope: language-only.
+Goal: clarify which costs the reported timing includes.
+Preserve claims, conditions, equations, numbers, and citations.
+Save the proposal and comparison in a new directory under review/rebuttal/.
+Also export a PDF using the included theme and retain the LaTeX source.
+Leave the supplied manuscript unchanged.
+```
 
 **Grammar across a manuscript:** give the entry file and ask the agent to check all included text. Large documents may need several passes; the report should state which sections were checked.
 
@@ -200,7 +216,7 @@ Context may be a neighboring sentence, a definition, or a condition from another
 
 Each change has an ID such as C1, so you can discuss or select it without finding the passage again. Section names and quoted anchors help you locate it in the manuscript; paragraph or line numbers are included where reliable.
 
-| Label | Presentation | Meaning |
+| Label | PDF annotation | Meaning |
 | --- | --- | --- |
 | Added | Blue text | New content, with insertion context |
 | Rewritten | Purple text | Replaced wording or content |
@@ -208,7 +224,22 @@ Each change has an ID such as C1, so you can discuss or select it without findin
 | Deleted | Original passage and a deletion reason | Content removed from the revision |
 | Unchanged | Black text | Retained content |
 
-Labels and IDs carry the meaning even when colors are unavailable. Markdown renderers vary in their support for colored text; the report remains readable without color.
+Labels and IDs carry the meaning even when colors are unavailable. Markdown uses the same locations and Before/After structure. Ordinary prose can use bold for aligned changes; colored text and `diff` syntax highlighting depend on the reader. The PDF theme provides consistent colors and card layouts.
+
+<details>
+<summary>A compact Markdown presentation (synthetic example)</summary>
+
+**Context · Evaluation Protocol:** Timing starts after feature precomputation and excludes that cost.
+
+**Before · Summary:** The adapter reduces **optimization** time by 38%.
+
+**After · Summary:** The adapter reduces **end-to-end training** time by 38%.
+
+**Review note · inferred:** The reported 38% reduction is for optimization time only. Check which timing measurement the revised claim refers to.
+
+Bold is presentation markup. Exact source copies remain in the comparison package; equations and LaTeX source can use fenced blocks to preserve their characters.
+
+</details>
 
 A useful explanation says what changed and how it affects the passage. For example, naming the gate tells the reader which component acts on the features. “More academic” alone does not explain an edit.
 
@@ -249,7 +280,7 @@ Keep the editable LaTeX source and inspect the rendered pages.
 
 ## Advanced installation
 
-The installer copies the complete [`skills/revision-comparison`](skills/revision-comparison) directory, including its references and PDF assets. Run the commands below from the cloned repository root.
+The skill source is [`skills/revision-comparison`](skills/revision-comparison). Run the commands below from the cloned repository root.
 
 ### Already cloned
 
