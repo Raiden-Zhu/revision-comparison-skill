@@ -1,10 +1,12 @@
 """Installer checks; all scratch files are retained. MIT; see ../LICENSE."""
 
 import os
+import importlib.util
 from pathlib import Path
 import subprocess
 import sys
 import unittest
+from unittest.mock import patch
 import uuid
 
 
@@ -12,6 +14,9 @@ ROOT = Path(__file__).resolve().parent.parent
 INSTALLER = ROOT / "scripts" / "install.py"
 SOURCE = ROOT / "skills" / "revision-comparison"
 RUN = ROOT / ".scratch" / "install-tests" / uuid.uuid4().hex
+SPEC = importlib.util.spec_from_file_location("skill_installer", INSTALLER)
+MODULE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(MODULE)
 
 
 class InstallTests(unittest.TestCase):
@@ -35,7 +40,8 @@ class InstallTests(unittest.TestCase):
         )
 
     def assert_complete(self, target):
-        originals = {p.relative_to(SOURCE) for p in SOURCE.rglob("*") if p.is_file()}
+        originals = {p.relative_to(SOURCE) for p in SOURCE.rglob("*")
+                     if p.is_file() and "__pycache__" not in p.parts and p.suffix != ".pyc"}
         installed = {p.relative_to(target) for p in target.rglob("*") if p.is_file()}
         self.assertEqual(originals, installed)
         for relative in originals:
@@ -96,6 +102,29 @@ class InstallTests(unittest.TestCase):
         result = self.install("--scope", "project")
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("requires --project", result.stderr)
+
+    def test_pdf_setup_failure_and_retry_preserve_the_installed_skill(self):
+        target = self.area / "new skill"
+        with patch.object(MODULE, "setup_pdf", return_value=1):
+            self.assertEqual(MODULE.main(["--dest", str(target), "--with-pdf"]), 1)
+        self.assert_complete(target)
+        marker = target / "user-note.md"
+        marker.write_bytes(b"preserve user changes")
+        with patch.object(MODULE, "setup_pdf", return_value=0) as setup:
+            self.assertEqual(MODULE.main(["--dest", str(target), "--with-pdf"]), 0)
+        setup.assert_called_once_with()
+        self.assertEqual(marker.read_bytes(), b"preserve user changes")
+
+    def test_pdf_setup_rejects_source_and_unrelated_existing_targets(self):
+        unrelated = self.area / "unrelated"
+        unrelated.mkdir()
+        marker = unrelated / "SKILL.md"
+        marker.write_text("---\nname: unrelated-skill\n---\n", encoding="utf-8")
+        with patch.object(MODULE, "setup_pdf") as setup:
+            self.assertEqual(MODULE.main(["--dest", str(SOURCE), "--with-pdf"]), 1)
+            self.assertEqual(MODULE.main(["--dest", str(unrelated), "--with-pdf"]), 1)
+        setup.assert_not_called()
+        self.assertEqual(marker.read_text(encoding="utf-8"), "---\nname: unrelated-skill\n---\n")
 
 
 if __name__ == "__main__":

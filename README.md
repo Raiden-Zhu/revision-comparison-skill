@@ -32,27 +32,29 @@ An edited passage alone leaves you reconstructing the change. The comparison put
 
 ## Install
 
-Requires Git and Python 3.8+. Choose your agent and run one block from a directory that does not already contain `revision-comparison-skill`. The installer copies the complete skill directory, including its references and assets.
+Requires Git and Python 3.8+. **We recommend installing LaTeX for PDF reports.** Choose your agent and run one block below to install the skill with PDF support. Start from a directory that does not already contain `revision-comparison-skill`.
 
 ### Codex
 
 ```sh
 git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
-  python3 revision-comparison-skill/scripts/install.py --agent codex
+  python3 revision-comparison-skill/scripts/install.py --agent codex --with-pdf
 ```
 
 ### Claude Code
 
 ```sh
 git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
-  python3 revision-comparison-skill/scripts/install.py --agent claude-code
+  python3 revision-comparison-skill/scripts/install.py --agent claude-code --with-pdf
 ```
+
+The `--with-pdf` option reuses an existing LaTeX installation and adds missing theme packages. If LaTeX is absent, it installs [TinyTeX](https://yihui.org/tinytex/) in your user directory. A small PDF build checks the setup. [PDF setup details](#pdf-setup).
+
+Markdown reports work without LaTeX; omit `--with-pdf` to install only the skill.
 
 After installation, invoke `$revision-comparison` in Codex or `/revision-comparison` in Claude Code. If it does not appear, reload the agent or start a new session. [Already cloned, project installation, or custom path?](#advanced-installation)
 
 The repository is currently private, so you need GitHub access to clone it. The installer leaves existing installations unchanged.
-
-Markdown reports work without LaTeX. PDF export requires a working LaTeX installation with the [theme's packages](skills/revision-comparison/references/rendering.md#latex-and-pdf).
 
 ### Try an example
 
@@ -280,7 +282,27 @@ Keep the editable LaTeX source and inspect the rendered pages.
 
 ## Advanced installation
 
-The skill source is [`skills/revision-comparison`](skills/revision-comparison). Run the commands below from the cloned repository root.
+The installer copies the complete [`skills/revision-comparison`](skills/revision-comparison) directory, including its references and PDF assets. Run the commands below from the cloned repository root.
+
+### PDF setup
+
+Add `--with-pdf` to any installation command to set up LaTeX as well. This can be repeated for an existing skill installation; the skill files are preserved.
+
+```sh
+python3 scripts/install.py --agent codex --with-pdf
+```
+
+The setup checks for a LaTeX compiler and the [theme's packages](skills/revision-comparison/references/rendering.md#latex-and-pdf), adds missing packages through TeX Live or MiKTeX, and compiles a small report with context cards and an equation. It does not upgrade the rest of your TeX installation or change your shell configuration. An older or restricted TeX installation may need attention from its package manager before setup can finish; failures keep the skill available for Markdown reports.
+
+If no compiler is found, setup downloads the official TinyTeX bundle for macOS, Linux (x86-64 or ARM64), or Windows. It installs in `~/.local/share/revision-comparison/TinyTeX`, without replacing another distribution. Linux and macOS need Perl to install TeX packages. Downloads require internet access.
+
+To check an existing setup without downloading or installing anything:
+
+```sh
+python3 skills/revision-comparison/scripts/setup_pdf.py --check
+```
+
+The check prints the compiler's full path and the test PDF location. New skill installations include the same helper, so your agent can find this toolchain even when it is not on `PATH`. If you keep an older skill installation, use the repository helper above and give your agent the printed compiler path. Manuscripts with additional fonts, languages, or custom packages may need further dependencies.
 
 ### Already cloned
 
@@ -329,7 +351,7 @@ For an older Codex setup that discovers skills in `CODEX_HOME/skills`:
 python3 scripts/install.py --dest "${CODEX_HOME:-$HOME/.codex}/skills/revision-comparison"
 ```
 
-The installer refuses an existing destination, including a symbolic link, and reports its location. Review an existing installation before updating it. There is no force-overwrite option; a copy failure retains the partial directory for inspection.
+The installer refuses an existing destination, including a symbolic link, and reports its location. With `--with-pdf`, it can check PDF support for an existing Revision Comparison installation while preserving the skill files. Review an existing installation before updating it. There is no force-overwrite option; a copy failure retains the partial directory for inspection.
 
 Other agents that can read files can follow [`SKILL.md`](skills/revision-comparison/SKILL.md) and its references directly. Whether the agent discovers the skill automatically depends on its host. Python is needed only for the installer. To install manually, copy the whole skill directory.
 
@@ -347,6 +369,7 @@ skills/revision-comparison/
   references/rendering.md
   assets/annotations.tex
   assets/comparison-style.tex
+  scripts/setup_pdf.py
 examples/
   contextual-review/  before, after, comparison, PDF preview
   language-edit/       before, after, comparison, PDF preview
@@ -356,6 +379,7 @@ examples/
 evaluations/cases.md
 scripts/install.py
 tests/test_install.py
+tests/test_pdf_setup.py
 assets/readme-hero-readable.svg       editable desktop banner
 assets/readme-hero-readable-mobile.svg  editable mobile banner
 LICENSE
@@ -364,10 +388,10 @@ LICENSE
 The [evaluation cases](evaluations/cases.md) cover common mistakes in revision comparisons. Contributions should use synthetic or explicitly shareable material and follow the editing and source-preservation rules in `SKILL.md`. To check the installer without touching your actual skill directories:
 
 ```sh
-python3 -B -m unittest discover -s tests -p test_install.py -v
+python3 -B -m unittest discover -s tests -p 'test_*.py' -v
 ```
 
-The tests use isolated destinations under `.scratch/install-tests/` and retain them for inspection.
+The tests use isolated destinations under `.scratch/` and retain them for inspection. Network and package-installation actions are mocked; they do not install LaTeX on your machine.
 
 ## License
 

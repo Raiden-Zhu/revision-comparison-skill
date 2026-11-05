@@ -10,6 +10,8 @@ For a long report, link a change index to its headings. Do not put long passages
 
 ## LaTeX and PDF
 
+If no working LaTeX toolchain is known, run `python3 <skill-directory>/scripts/setup_pdf.py --check`. The helper checks the comparison theme with a small PDF build and prints the compiler's full path. It also finds the user-local TinyTeX toolchain created by the repository's `--with-pdf` installer, even when it is not on `PATH`. Use that full compiler path for the report. The check never installs anything; `--install` is for an explicitly requested LaTeX setup.
+
 For a new standalone PDF comparison, use the [visual theme](../assets/comparison-style.tex) unless the user supplies another layout. It provides navy headings, light Before/After cards, and green context and reason cards, with the same annotation colors as the core skill. The theme changes presentation only; source text, editing scope, reasons, and verification remain governed by the comparison contract.
 
 Load `annotations.tex`, then `comparison-style.tex`, using paths relative to the wrapper. Use `\rcReportTitle{Title}{Subtitle}`, `rcContext` for context or reason cards, and `\begin{rcPassage}{C1}{BEFORE}{Short location}` for each passage. Keep the third argument short; put longer paths or anchors in the body. Page size and margins belong to the wrapper. The theme uses Latin Modern, `tcolorbox` with its `breakable` and `skins` libraries, and `fancyhdr`, available in common TeX distributions. If packages are unavailable, use a simple readable layout and disclose the fallback.
