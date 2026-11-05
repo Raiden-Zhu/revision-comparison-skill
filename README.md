@@ -17,7 +17,9 @@
   <a href="LICENSE">MIT license</a>
 </p>
 
-Revision Comparison is an agent skill for reviewing manuscript revisions in context. It brings original and revised passages, relevant context, and revision notes together, so you can decide which edits to keep.
+Revision Comparison is an agent skill for reviewing edits to your writing in context. It brings original and revised passages, relevant context, and concise revision notes together, so you can decide which edits to keep.
+
+Use it for papers, reports, proposals, blog posts, and other drafts. It is particularly suited to academic writing, where small edits can change a claim or its conditions.
 
 ## Why this skill
 
@@ -243,7 +245,7 @@ Each example includes its source files and their hashes. The banner illustrates 
 
 ## Quick start
 
-Open your manuscript project in the agent and paste a prompt. Replace the sample paths with your own.
+Open your writing project in the agent and paste a prompt. Replace the sample paths with your own.
 
 ### Compare two drafts
 
@@ -274,7 +276,7 @@ Open the returned PDF (`comparison.pdf` by default) to review the changes by ID,
 
 ## How it works
 
-`compare` preserves the supplied versions and shows their differences, with concerns reported separately. `propose-and-compare` writes a revision within your requested scope and compares it with the original. The optional academic profile guides the writing.
+`compare` preserves the supplied versions and shows their differences, with concerns reported separately. `propose-and-compare` writes a revision within your requested scope and compares it with the original. The optional academic profile guides academic revisions.
 
 The report distinguishes reasons supplied by the author from the agent's own interpretation. For an existing revision, the agent labels its own interpretation as inferred when no author explanation is available. Language-only proposals preserve claims, notation, numbers, equations, citations, and document structure. Structural edits follow the scope you request; changes to claims or mathematics need supporting evidence. See the [skill instructions](skills/revision-comparison/SKILL.md) for the editing rules.
 
