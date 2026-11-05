@@ -34,9 +34,10 @@ An edited passage alone leaves you reconstructing the change. The comparison put
 
 Requires Git and Python 3.8+. Choose **skill only** or **skill + LaTeX setup**, then copy the command for your agent. Start from a directory that does not already contain `revision-comparison-skill`.
 
-### 1. Install the skill
+> [!NOTE]
+> **LaTeX setup is optional.** Both options include the PDF theme. Choose skill only for Markdown reports or to use LaTeX you already have.
 
-Use this for Markdown reports, or when you already have a working LaTeX installation. PDF export is included in both options; this option installs only the skill.
+### 1. Install the skill
 
 **Codex**
 
@@ -75,13 +76,21 @@ git clone https://github.com/Raiden-Zhu/revision-comparison-skill.git &&
 
 After installation, invoke `$revision-comparison` in Codex or `/revision-comparison` in Claude Code. If it does not appear, reload the agent or start a new session. [Already cloned, project installation, or custom path?](#advanced-installation)
 
-The prompts below use Codex syntax. In Claude Code, replace the opening `$revision-comparison` with `/revision-comparison`.
+The prompts below use Codex `$skill-name` mentions. In Claude Code, start with `/revision-comparison` and refer to any other installed skills by name.
 
 The repository is currently private, so you need GitHub access to clone it. The installer leaves existing installations unchanged.
 
 ### Try an example
 
-Open your manuscript project in the agent, replace `manuscript.tex` with your file, and paste:
+Choose a workflow, replace the sample paths with your own, and paste the prompt into your agent.
+
+| Your starting point | Example |
+| --- | --- |
+| One LaTeX manuscript | **1. Polish and compare** |
+| An editing skill you already use | **2. Edit with another skill, then compare** |
+| Two saved PDF or LaTeX versions | **3. Compare existing drafts** |
+
+#### 1. Polish and compare
 
 ```text
 $revision-comparison
@@ -98,8 +107,54 @@ This produces a polished manuscript and a separate comparison for reviewing the 
 
 For Markdown-only use, ask for the revised source and a Markdown comparison, and skip PDF compilation.
 
+> [!TIP]
+> **Keep your usual editor.** Another installed skill can make the revision first. Revision Comparison can then compare its saved output with the original, without another rewrite.
+
 <details>
-<summary>Only have a PDF?</summary>
+<summary><strong>2. Edit with another skill, then compare</strong></summary>
+
+This example uses a separately installed PDF-editing skill named `$pdf`. Replace that name with the skill available in your agent. The editor produces the revised PDF; Revision Comparison reviews the two saved versions.
+
+```text
+$revision-comparison
+Use the installed $pdf skill to polish the Introduction in manuscript.pdf.
+Preserve scientific meaning, equations, numbers, and citations.
+Save the result as manuscript-revised.pdf, keeping the original unchanged.
+Then use compare mode to compare those two PDFs without further edits.
+Show exact Before/After passages, page numbers, relevant context, and notes.
+Flag unclear text or equations instead of guessing.
+Save a PDF comparison with its Markdown report and editable LaTeX source
+in a new directory under review/pdf-edit/.
+```
+
+The same sequence works with a writing skill on LaTeX sources. For example, if installed, `$research-paper-writing` can polish the prose, or `$academic-humanizer` can refine its voice; save that revision before comparing it.
+
+</details>
+
+<details>
+<summary><strong>3. Compare existing drafts (.pdf or .tex)</strong></summary>
+
+Use this after a revision is already complete, whether you made it yourself or used another editor.
+
+```text
+$revision-comparison
+Use compare mode.
+Before: drafts/manuscript-v1.pdf
+After: drafts/manuscript-v2.pdf
+Scope: both complete files. Preserve both versions without rewriting either.
+Show exact Before/After passages, locations, relevant context, and notes.
+Flag uncertain text extraction or passage alignment instead of guessing.
+Export a PDF comparison using the included theme,
+with its Markdown report and editable LaTeX source.
+Save all outputs in a new directory under review/two-versions/.
+```
+
+For LaTeX drafts, replace the two paths with `drafts/manuscript-v1.tex` and `drafts/manuscript-v2.tex`. No additional editing skill is needed.
+
+</details>
+
+<details>
+<summary>Read a PDF and propose revised passages</summary>
 
 Your agent can read the PDF and propose revised passages. The example below saves editable text and a comparison PDF; use the LaTeX source when you want a revised manuscript PDF in its original template.
 
@@ -186,7 +241,7 @@ The report also shows a shorter training description (**C1**) and two reporting 
 | Meaning review | Find a removed assumption and check whether a rewritten objective means the same thing | [Report](examples/semantic-review/comparison.md) · [Before](examples/semantic-review/before.md) · [After](examples/semantic-review/after.md) |
 | Mathematical text | Preserve the full equation and its conditions | [Report](examples/math/comparison.md) · [Before](examples/math/before.tex) · [After](examples/math/after.tex) |
 
-Each example includes its source files and their hashes. The banner shows the exact before-and-after sentences from C3, with a short summary of the timing definition. The full report quotes that definition and gives its location. PDF previews are rendered from the reports. The [desktop](assets/readme-hero-readable.svg) and [mobile](assets/readme-hero-readable-mobile.svg) banner sources are editable.
+Each example includes its source files and their hashes. The banner illustrates C3's before-and-after timing claim, with a short summary of the timing definition. The full report quotes that definition and gives its location. PDF previews are rendered from the reports. The [desktop](assets/readme-hero-readable.svg) and [mobile](assets/readme-hero-readable-mobile.svg) banner sources are editable.
 
 </details>
 
