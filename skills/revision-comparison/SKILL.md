@@ -55,7 +55,7 @@ Verify that quotations match the snapshots, locations resolve, the proposed text
 
 ## Deliver
 
-Use the requested format; otherwise deliver Markdown. For LaTeX/PDF, read the [rendering guide](references/rendering.md), retain editable source, compile, and inspect the rendered output. If required tools are unavailable, deliver the editable comparison and identify which export or visual checks were not performed.
+Honor an explicit format request. Otherwise, prefer `comparison.pdf` with editable `comparison.tex` and a Markdown companion. Follow the [rendering guide](references/rendering.md) to check the existing LaTeX environment, compile, and inspect the report. If the toolchain is unavailable or the PDF build cannot be completed after wrapper-level fixes, deliver `comparison.md`, retain any useful TeX, and explain the fallback and unperformed checks. Ordinary report generation does not authorize installing LaTeX or adding packages.
 
 Return the primary comparison, snapshot and revised-text locations, coverage, and unresolved issues. A clean revised draft may accompany the comparison; it does not replace the before/after pairs. Keep manuscript text in its language and use the requested language for explanations. English is the default for notes inside an English manuscript.
 

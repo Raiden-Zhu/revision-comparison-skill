@@ -35,7 +35,7 @@ An edited passage alone leaves you reconstructing the change. The comparison put
 Requires Git and Python 3.8+. Choose **skill only** or **skill + LaTeX setup**, then copy the command for your agent. Start from a directory that does not already contain `revision-comparison-skill`.
 
 > [!NOTE]
-> **LaTeX setup is optional.** Both options include the PDF theme. Choose skill only for Markdown reports or to use LaTeX you already have.
+> **LaTeX installation is optional.** Reports default to PDF with editable TeX when an existing LaTeX environment is usable, with Markdown as the fallback. Both installation options include the PDF theme.
 
 ### 1. Install the skill
 
@@ -98,9 +98,8 @@ Polish manuscript.tex for grammar and clarity.
 Show the edits with their surrounding context.
 Preserve scientific meaning, notation, equations, numbers, and citations.
 Save a revised copy and compile it to a PDF; keep the original unchanged.
-Also export a PDF comparison using the included theme,
-with its Markdown report and editable LaTeX source.
-Put all outputs in a new directory under review/manuscript/.
+Save the comparison and its editable sources with the revised manuscript
+in a new directory under review/manuscript/.
 ```
 
 This produces a polished manuscript and a separate comparison for reviewing the edits.
@@ -110,7 +109,7 @@ For Markdown-only use, ask for the revised source and a Markdown comparison, and
 > [!TIP]
 > **Keep your usual editor.** Another installed skill can make the revision first. Revision Comparison can then compare its saved output with the original, without another rewrite.
 
-<details>
+<details open>
 <summary><strong>2. Edit with another skill, then compare</strong></summary>
 
 This example uses a separately installed PDF-editing skill named `$pdf`. Replace that name with the skill available in your agent. The editor produces the revised PDF; Revision Comparison reviews the two saved versions.
@@ -123,7 +122,7 @@ Save the result as manuscript-revised.pdf, keeping the original unchanged.
 Then use compare mode to compare those two PDFs without further edits.
 Show exact Before/After passages, page numbers, relevant context, and notes.
 Flag unclear text or equations instead of guessing.
-Save a PDF comparison with its Markdown report and editable LaTeX source
+Save the comparison and its editable sources
 in a new directory under review/pdf-edit/.
 ```
 
@@ -131,7 +130,7 @@ The same sequence works with a writing skill on LaTeX sources. For example, if i
 
 </details>
 
-<details>
+<details open>
 <summary><strong>3. Compare existing drafts (.pdf or .tex)</strong></summary>
 
 Use this after a revision is already complete, whether you made it yourself or used another editor.
@@ -144,9 +143,8 @@ After: drafts/manuscript-v2.pdf
 Scope: both complete files. Preserve both versions without rewriting either.
 Show exact Before/After passages, locations, relevant context, and notes.
 Flag uncertain text extraction or passage alignment instead of guessing.
-Export a PDF comparison using the included theme,
-with its Markdown report and editable LaTeX source.
-Save all outputs in a new directory under review/two-versions/.
+Save the comparison and its editable sources
+in a new directory under review/two-versions/.
 ```
 
 For LaTeX drafts, replace the two paths with `drafts/manuscript-v1.tex` and `drafts/manuscript-v2.tex`. No additional editing skill is needed.
@@ -166,9 +164,8 @@ Preserve scientific meaning, equations, numbers, and citations.
 Save the revised passages as editable text; keep the original PDF unchanged.
 Identify original passages by page number and quoted anchors.
 Flag unclear text or equations instead of guessing.
-Export a PDF comparison using the included theme,
-and retain its Markdown report and editable LaTeX source.
-Put all outputs in a new directory under review/introduction/.
+Save the revised passages, comparison, and its editable sources
+in a new directory under review/introduction/.
 ```
 
 </details>
@@ -185,10 +182,9 @@ Before: examples/contextual-review/before.md
 After: examples/contextual-review/after.md
 Preserve both inputs and compare both complete files.
 Save the report in a new directory under review/example-run/.
-Also export a PDF using the included theme and keep the LaTeX source.
 ```
 
-For a Markdown-only report, omit the PDF export line.
+For a Markdown-only report, add: `Output Markdown only; do not compile PDF.`
 
 </details>
 
@@ -257,7 +253,7 @@ Use compare mode.
 Before: drafts/method-v1.tex
 After: drafts/method-v2.tex
 Scope: the feature-extraction subsection.
-Save the Markdown comparison as review/method-comparison/comparison.md.
+Save the comparison and its editable sources in review/method-comparison/.
 Explain the differences in English. Preserve both supplied versions.
 ```
 
@@ -270,11 +266,11 @@ Scope: the feature-extraction subsection. Editing scope: language-only.
 Goal: clarify which operation acts on the frozen features.
 Preserve claims, notation, equations, numbers, and citations.
 Use the optional academic style profile.
-Save the Markdown comparison as review/method-proposal/comparison.md.
+Save the comparison and its editable sources in review/method-proposal/.
 Do not apply the proposal to the manuscript.
 ```
 
-Open `comparison.md` to review the changes by ID. The output includes copies of your inputs and, for a proposed edit, the exact revised text. Paste these prompts into your agent.
+Open `comparison.pdf` to review the changes by ID, or `comparison.md` when PDF export is unavailable. The output includes copies of your inputs and, for a proposed edit, the exact revised text. Paste these prompts into your agent.
 
 ## How it works
 
@@ -295,7 +291,6 @@ Editing scope: language-only.
 Goal: clarify which costs the reported timing includes.
 Preserve claims, conditions, equations, numbers, and citations.
 Save the proposal and comparison in a new directory under review/rebuttal/.
-Also export a PDF using the included theme and retain the LaTeX source.
 Leave the supplied manuscript unchanged.
 ```
 
@@ -321,7 +316,7 @@ Use propose-and-compare mode on paper/intro.tex.
 Read notes/paper-context.md for the intended audience and definitions.
 Editing scope: language-only. Goal: clarify the motivation paragraph.
 Identify which context comes from the notes and which from the manuscript.
-Save a Markdown comparison in review/intro/; do not apply edits.
+Save the comparison and its editable sources in review/intro/; do not apply edits.
 ```
 
 ### Apply selected edits
@@ -392,19 +387,18 @@ The documentation is in English. Manuscript language follows the target document
 
 ## Formats and limits
 
-- **Markdown:** the default, editable report.
-- **LaTeX/PDF:** an optional PDF with editable LaTeX source, compilation checks, and page-layout inspection. See [rendering guidance](skills/revision-comparison/references/rendering.md).
+- **PDF with editable TeX:** the default when the existing LaTeX environment can build the comparison. The agent checks the toolchain, compiles the report, inspects the rendered pages, and keeps a Markdown companion. See [rendering guidance](skills/revision-comparison/references/rendering.md).
+- **Markdown:** the fallback when LaTeX is unavailable or the PDF build cannot be completed. Any useful TeX and build diagnostics are retained, with the fallback reason. Markdown-only requests are honored directly.
 - **Other documents:** use the host's available reading and export capabilities. Native Word Track Changes is not implemented by this repository.
 
 The agent needs readable sources. If it cannot read a passage, formula, or reference reliably, it reports what is missing.
 
 The included [LaTeX theme](skills/revision-comparison/assets/comparison-style.tex) uses the banner's navy headings, green context and reason cards, subtle borders, and purple revision marks. It changes presentation only. Stacked cards can continue across pages; formulas retain their size and content. PDF export needs a working LaTeX toolchain with the packages listed in the rendering guide.
 
-To request this export, add to your prompt:
+Normal export uses existing tools. Installing LaTeX or adding packages remains an optional setup action. To request Markdown only, add to your prompt:
 
 ```text
-Also export comparison.pdf using the included visual theme.
-Keep the editable LaTeX source and inspect the rendered pages.
+Output Markdown only; do not compile PDF.
 ```
 
 ## Advanced installation
