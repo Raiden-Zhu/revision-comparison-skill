@@ -17,11 +17,15 @@
   <a href="LICENSE">MIT license</a>
 </p>
 
-Revision Comparison is an agent skill for reviewing edits to your writing in context. It brings original and revised passages, relevant context, and concise revision notes together, so you can decide which edits to keep.
+Revision Comparison is an agent skill for reviewing edits to your writing. It shows exact before-and-after passages with highlighted changes, context, and short notes, so you can see what changed and decide what to keep.
 
 Use it for papers, reports, proposals, blog posts, and other drafts. It is particularly suited to academic writing, where small edits can change a claim or its conditions.
 
 ## Why this skill
+
+An agent's edit summary helps, but you still need to check the actual passages. When edits are spread across a draft, that means searching through both versions to see what changed and whether the meaning stayed the same.
+
+The report keeps the original and revised passages together with the context needed to judge each edit, including definitions or conditions from other sections.
 
 <p align="center">
   <picture>
@@ -30,7 +34,7 @@ Use it for papers, reports, proposals, blog posts, and other drafts. It is parti
   </picture>
 </p>
 
-An edited passage alone leaves you reconstructing the change. The comparison puts the original, revision, relevant context, and explanation in one place. [Read this example](examples/structure-edit/comparison.md).
+[Read this example](examples/structure-edit/comparison.md).
 
 ## Install
 
@@ -80,7 +84,7 @@ After installation, invoke `$revision-comparison` in Codex or `/revision-compari
 
 The prompts below use Codex `$skill-name` mentions. In Claude Code, start with `/revision-comparison` and refer to any other installed skills by name.
 
-The repository is currently private, so you need GitHub access to clone it. The installer leaves existing installations unchanged.
+The installer leaves existing installations unchanged.
 
 ### Try an example
 
@@ -204,7 +208,7 @@ The number stays at 38%, but `optimization time` becomes `end-to-end training ti
   <a href="examples/contextual-review/comparison-readable.pdf"><img src="examples/contextual-review/comparison-readable-detail.png" alt="PDF excerpt, C3: the timing definition from Evaluation Protocol, the original and revised Summary sentences, and a review note explaining which timing measure the 38% refers to." width="860"></a>
 </p>
 
-The report also shows a shorter training description (**C1**) and two reporting paragraphs moved and combined (**C2**). The timing claim (**C3**) needs closer review.
+The overview covers three changes: a shorter training description (**C1**), reporting paragraphs moved and combined (**C2**), and a timing claim that needs closer review (**C3**). Follow the IDs to see the passages, context, and notes.
 
 <details>
 <summary>A simpler language-only proposal</summary>
